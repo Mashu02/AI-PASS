@@ -1,6 +1,11 @@
 import pandas as pd
-import numpy as np
+from scipy import spatial
 
-df = pd.read_csv('data_full.csv', sep = ';')
+df = pd.read_csv('data_full_full.csv', sep = ';')
 
 print(df.to_string())
+
+
+
+#als imput misschien nieuwe lijst
+#en dan top 10 dichts bij de cosine similarity recommenden?
