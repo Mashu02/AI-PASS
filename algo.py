@@ -9,7 +9,7 @@ df_list = df.values.tolist()
 #print(df_list)
 
 
-list_user = [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+list_user = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 #https://en.wikipedia.org/wiki/Cosine_similarity
 def cosine_sim(lijst):
     sum = 0
@@ -38,7 +38,8 @@ cosine_sim(list_user)
 #
 # jaccard()
 #kijk hoeveel 1 en er in de lijst zitten
-#jaccard is eigelijk beter want het zijn alleen waardes van 1 of 0
+#moet dubble for loop en dan kijken of ze allbei gelijk zijn aan 1 dan counter +=1
+#dan counter / len
 
 
 
