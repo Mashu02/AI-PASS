@@ -3,7 +3,7 @@ from math import sqrt
 
 df = pd.read_csv('data_full_full.csv', sep = ';')
 
-#print(df.to_string())
+print(df.to_string())
 
 df_list = df.values.tolist()
 #print(df_list)
@@ -26,7 +26,7 @@ def cosine_sim(lijst):
         print(cossim)
         print(x)
 
-cosine_sim(list_user)
+#cosine_sim(list_user)
 
 
 # def jaccard():
