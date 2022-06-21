@@ -3,20 +3,20 @@ from math import sqrt
 
 df = pd.read_csv('data_full_full.csv', sep = ';')
 
-print(df.to_string())
+#print(df.to_string())
 
 df_list = df.values.tolist()
 #print(df_list)
 
 
-list_user = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+list_user = [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 #https://en.wikipedia.org/wiki/Cosine_similarity
 def cosine_sim(lijst):
-    sum = 0
-    sumA = 0
-    sumB = 0
 
     for x in (df_list):
+        sum = 0
+        sumA = 0
+        sumB = 0
         for i,j in zip(x, lijst):
             sum += i*j
             sumA += i*i
@@ -26,17 +26,23 @@ def cosine_sim(lijst):
         print(cossim)
         print(x)
 
-#cosine_sim(list_user)
+cosine_sim(list_user)
 
 
-# def jaccard():
-#     for x in (df_list):
-#         intersec = len(list(set(x).intersection(list_user)))
-#         union = (len(x) + len(list_user)) - intersec
-#         y = float(intersec) / union
-#         print(y)
-#
-# jaccard()
+def jaccard():
+    intersec = []
+    for x in (df_list):
+        for i,j in zip(x,list_user):
+            print(list_user)
+
+    union = (len(x) + len(list_user)) - intersec
+    y = float(intersec) / union
+
+
+
+#jaccard()
+
+
 #kijk hoeveel 1 en er in de lijst zitten
 #moet dubble for loop en dan kijken of ze allbei gelijk zijn aan 1 dan counter +=1
 #dan counter / len
