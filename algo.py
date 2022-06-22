@@ -39,11 +39,11 @@ def cosine_sim(lijst, top_hoeveel):
     #de top waardes in een dictionary
     top_dic = dict(Counter(combination_with_cosim).most_common(top_hoeveel))
     top_dic_keys = list(top_dic.keys())
-
+    print(top_dic)
     #return list met top 5 als string
     return top_dic_keys
 
 
-print(cosine_sim(list_user,5))
+#print(cosine_sim(list_user,5))
 
 
