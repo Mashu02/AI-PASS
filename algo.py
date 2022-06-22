@@ -37,16 +37,13 @@ def cosine_sim(lijst, top_hoeveel):
     del combination_with_cosim[str(list_user)]
 
     #de top waardes in een dictionary
-    print(dict(Counter(combination_with_cosim).most_common(top_hoeveel)))
+    top_dic = dict(Counter(combination_with_cosim).most_common(top_hoeveel))
+    top_dic_keys = list(top_dic.keys())
 
-cosine_sim(list_user,5)
-
-
-#kan nu gewoon de hoogste waarde doen en dan combination in lijst
-
+    #return list met top 5 als string
+    return top_dic_keys
 
 
+print(cosine_sim(list_user,5))
 
 
-
-# verschillende returns en stuk gui
