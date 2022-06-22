@@ -28,16 +28,17 @@ def draw_text(text, font, color, surface, x, y):
 def main_menu():
     while True:
         clicked_button = []
-        screen.fill((255, 255, 247))
+        screen.fill((240,255,255))
         draw_text('pick colors', font, c.black, screen, 20, 20)
 
-        mx, my = pygame.mouse.get_pos()
+        mouse = pygame.mouse.get_pos()
 
-        button_1 = pygame.Rect(1445, 800, 200, 50)
-        if button_1.collidepoint((mx, my)):
+
+        button_feedback = pygame.Rect(1445, 800, 200, 50)
+        if button_feedback.collidepoint((mouse)):
             if click:
                 feedback()
-        pygame.draw.rect(screen, (211, 211, 211), button_1)
+        pygame.draw.rect(screen, (211, 211, 211), button_feedback)
         click = False
 
         place_button(c.black, b.button_black)
@@ -74,10 +75,20 @@ def main_menu():
         mainClock.tick(60)
 
 
+#MOET NOG DE INPUT IN EEN LIJST KRIJGEN
+
+
+
+
+
+
+
+
+
 def feedback():
     running = True
     while running:
-        screen.fill((255, 255, 247))
+        screen.fill((240,255,255))
 
         draw_text('feedback', font, c.black, screen, 20, 20)
         for event in pygame.event.get():

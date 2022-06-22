@@ -44,6 +44,6 @@ def cosine_sim(lijst, top_hoeveel):
     return top_dic_keys
 
 
-#print(cosine_sim(list_user,5))
+print(cosine_sim(list_user,5))
 
 
