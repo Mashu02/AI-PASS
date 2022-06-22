@@ -5,28 +5,22 @@ from collections import Counter
 df = pd.read_csv('data_full_full.csv', sep=';')
 df_list = df.values.tolist()
 
-
+list_user = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
 
 #wil ik doen bij de top 5 combinaties hoevaak die voor komt
-def most_picks():
+def most_picks(combination_nummer):
     c = Counter()
     for combination in df_list:
         c[str(combination)] += 1
-
-
     #print 13 komt 13 keer voor
-    print(c['[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]'])
-    #print(c)
+    print(c[combination_nummer])
+
+#most_picks('[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]')
 
 
-
-
-
-list_user = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
 
 # https://en.wikipedia.org/wiki/Cosine_similarity
-def cosine_sim(lijst):
-    top = []
+def cosine_sim(lijst, top_hoeveel):
     combination_with_cosim = {}
     for x in df_list:
         sum = 0
@@ -38,9 +32,14 @@ def cosine_sim(lijst):
             sumB += j * j
         cossim = sum / ((sqrt(sumA)) * (sqrt(sumB)))
         combination_with_cosim[str(x)] = cossim
-    print(combination_with_cosim)
 
-#cosine_sim(list_user)
+    #remove de input
+    del combination_with_cosim[str(list_user)]
+
+    #de top waardes in een dictionary
+    print(dict(Counter(combination_with_cosim).most_common(top_hoeveel)))
+
+cosine_sim(list_user,5)
 
 
 #kan nu gewoon de hoogste waarde doen en dan combination in lijst
