@@ -2,10 +2,11 @@ import sys
 import pygame
 import colors as c
 import buttons as b
+import algo
+from pygame.locals import *
+from PIL import Image
 
 mainClock = pygame.time.Clock()
-from pygame.locals import *
-
 pygame.init()
 
 
@@ -38,11 +39,13 @@ def main_menu():
         screen.fill((240,255,255))
         draw_text('pick colors', font, c.black, screen, 20, 20)
         draw_text('selected colors', font, c.black, screen, 650, 80)
+        draw_text('generate', font, c.black, screen, 785, 60)
         y_pos = 100
         mouse = pygame.mouse.get_pos()
 
-
+        button_generate = pygame.Rect(765, 80, 100, 30)
         button_feedback = pygame.Rect(1445, 800, 200, 50)
+
         if button_feedback.collidepoint((mouse)):
             if click:
                 feedback()
@@ -217,7 +220,17 @@ def main_menu():
                     clicked_button_list_codes.append((255,105,180))
                     clicked_button_list.append("Pink")
 
+        elif button_generate.collidepoint((mouse)):
+            if click:
+                algo.create_image(clicked_button_list_codes)
+                randomly_generated_image = Image.open(r'image.png')
+                pygame_surface = algo.pilImageToSurface(randomly_generated_image)
+                pygame_surface = pygame.transform.smoothscale(pygame_surface, (650,650))
+                screen.blit(pygame_surface, (950, 60))
+
+
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
+        pygame.draw.rect(screen, (211, 211, 211), button_generate)
         click = False
 
         place_button(c.black, b.button_black)
@@ -238,9 +251,6 @@ def main_menu():
         place_button(c.purple, b.button_purple)
         place_button(c.pink, b.button_pink)
 
-
-        print(clicked_button_list_codes)
-
         for single_color in clicked_button_list:
             draw_text(single_color, font, c.black, screen, 650, y_pos)
             y_pos += 18
@@ -260,8 +270,6 @@ def main_menu():
         pygame.display.update()
         mainClock.tick(60)
 
-
-#MOET NOG DE INPUT IN EEN LIJST KRIJGEN
 
 
 def feedback():
