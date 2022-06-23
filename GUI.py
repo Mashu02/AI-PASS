@@ -15,7 +15,11 @@ screen = pygame.display.set_mode((1700, 900))
 pygame.display.set_caption('color matcher')
 font = pygame.font.SysFont(None, 20)
 click = False
-clicked_button = []
+clicked_button = {"Black" : 0,  "Grey" : 0,  "Silver" : 0,  "White" : 0,  "Brown" : 0,
+                  "Red" : 0,  "Orange" : 0,  "Gold" : 0,  "Beige" : 0,  "Yellow" : 0,
+                  "Green" : 0,  "Turqoise" : 0,  "Teal" : 0,  "Blue" : 0,  "Violet" : 0,
+                  "Purple" : 0,  "Pink" : 0}
+clicked_button_list = []
 
 def place_button(button, button_color):
     return pygame.draw.rect(screen, button, button_color)
@@ -41,122 +45,140 @@ def main_menu():
                 feedback()
         elif b.button_black.collidepoint((mouse)):
             if click:
-                if "Black" in clicked_button:
-                    clicked_button.remove("Black")
+                if clicked_button["Black"] == 1 or "Black" in clicked_button_list:
+                    clicked_button["Black"] = 0
+                    clicked_button_list.remove("Black")
                 else:
-                    clicked_button.append("Black")
-
+                    clicked_button["Black"] = 1
+                    clicked_button_list.append("Black")
         elif b.button_grey.collidepoint((mouse)):
             if click:
-                if "Grey" in clicked_button:
-                    clicked_button.remove("Grey")
+                if clicked_button["Grey"] == 1 or "Grey" in clicked_button_list:
+                    clicked_button["Grey"] = 0
+                    clicked_button_list.remove("Grey")
                 else:
-                    clicked_button.append("Grey")
-
+                    clicked_button["Grey"] = 1
+                    clicked_button_list.append("Grey")
         elif b.button_silver.collidepoint((mouse)):
             if click:
-                if "Silver" in clicked_button:
-                    clicked_button.remove("Silver")
+                if clicked_button["Silver"] == 1 or "Silver" in clicked_button_list:
+                    clicked_button["Silver"] = 0
+                    clicked_button_list.remove("Silver")
                 else:
-                    clicked_button.append("Silver")
-
+                    clicked_button["Silver"] = 1
+                    clicked_button_list.append("Silver")
         elif b.button_white.collidepoint((mouse)):
             if click:
-                if "White" in clicked_button:
-                    clicked_button.remove("White")
+                if clicked_button["White"] == 1 or "White" in clicked_button_list:
+                    clicked_button["White"] = 0
+                    clicked_button_list.remove("White")
                 else:
-                    clicked_button.append("White")
-
+                    clicked_button["White"] = 1
+                    clicked_button_list.append("White")
         elif b.button_brown.collidepoint((mouse)):
             if click:
-                if "Brown" in clicked_button:
-                    clicked_button.remove("Brown")
+                if clicked_button["Brown"] == 1 or "Brown" in clicked_button_list:
+                    clicked_button["Brown"] = 0
+                    clicked_button_list.remove("Brown")
                 else:
-                    clicked_button.append("Brown")
-
+                    clicked_button["Brown"] = 1
+                    clicked_button_list.append("Brown")
         elif b.button_red.collidepoint((mouse)):
             if click:
-                if "Red" in clicked_button:
-                    clicked_button.remove("Red")
+                if clicked_button["Red"] == 1 or "Red" in clicked_button_list:
+                    clicked_button["Red"] = 0
+                    clicked_button_list.remove("Red")
                 else:
-                    clicked_button.append("Red")
-
+                    clicked_button["Red"] = 1
+                    clicked_button_list.append("Red")
         elif b.button_orange.collidepoint((mouse)):
             if click:
-                if "Orange" in clicked_button:
-                    clicked_button.remove("Orange")
+                if clicked_button["Orange"] == 1 or "Orange" in clicked_button_list:
+                    clicked_button["Orange"] = 0
+                    clicked_button_list.remove("Orange")
                 else:
-                    clicked_button.append("Orange")
-
+                    clicked_button["Orange"] = 1
+                    clicked_button_list.append("Orange")
         elif b.button_gold.collidepoint((mouse)):
             if click:
-                if "Gold" in clicked_button:
-                    clicked_button.remove("Gold")
+                if clicked_button["Gold"] == 1 or "Gold" in clicked_button_list:
+                    clicked_button["Gold"] = 0
+                    clicked_button_list.remove("Gold")
                 else:
-                    clicked_button.append("Gold")
-
+                    clicked_button["Gold"] = 1
+                    clicked_button_list.append("Gold")
         elif b.button_beige.collidepoint((mouse)):
             if click:
-                if "Beige" in clicked_button:
-                    clicked_button.remove("Beige")
+                if clicked_button["Beige"] == 1 or "Beige" in clicked_button_list:
+                    clicked_button["Beige"] = 0
+                    clicked_button_list.remove("Beige")
                 else:
-                    clicked_button.append("Beige")
-
+                    clicked_button["Beige"] = 1
+                    clicked_button_list.append("Beige")
         elif b.button_yellow.collidepoint((mouse)):
             if click:
-                if "Yellow" in clicked_button:
-                    clicked_button.remove("Yellow")
+                if clicked_button["Yellow"] == 1 or "Yellow" in clicked_button_list:
+                    clicked_button["Yellow"] = 0
+                    clicked_button_list.remove("Yellow")
                 else:
-                    clicked_button.append("Yellow")
-
+                    clicked_button["Yellow"] = 1
+                    clicked_button_list.append("Yellow")
         elif b.button_green.collidepoint((mouse)):
             if click:
-                if "Green" in clicked_button:
-                    clicked_button.remove("Green")
+                if clicked_button["Green"] == 1 or "Green" in clicked_button_list:
+                    clicked_button["Green"] = 0
+                    clicked_button_list.remove("Green")
                 else:
-                    clicked_button.append("Green")
-
+                    clicked_button["Green"] = 1
+                    clicked_button_list.append("Green")
         elif b.button_turqoise.collidepoint((mouse)):
             if click:
-                if "Turqoise" in clicked_button:
-                    clicked_button.remove("Turqoise")
+                if clicked_button["Turqoise"] == 1 or "Turqoise" in clicked_button_list:
+                    clicked_button["Turqoise"] = 0
+                    clicked_button_list.remove("Turqoise")
                 else:
-                    clicked_button.append("Turqoise")
-
+                    clicked_button["Turqoise"] = 1
+                    clicked_button_list.append("Turqoise")
         elif b.button_teal.collidepoint((mouse)):
             if click:
-                if "Teal" in clicked_button:
-                    clicked_button.remove("Teal")
+                if clicked_button["Teal"] == 1 or "Teal" in clicked_button_list:
+                    clicked_button["Teal"] = 0
+                    clicked_button_list.remove("Teal")
                 else:
-                    clicked_button.append("Teal")
-
+                    clicked_button["Teal"] = 1
+                    clicked_button_list.append("Teal")
         elif b.button_blue.collidepoint((mouse)):
             if click:
-                if "Blue" in clicked_button:
-                    clicked_button.remove("Blue")
+                if clicked_button["Blue"] == 1 or "Blue" in clicked_button_list:
+                    clicked_button["Blue"] = 0
+                    clicked_button_list.remove("Blue")
                 else:
-                    clicked_button.append("Blue")
-
+                    clicked_button["Blue"] = 1
+                    clicked_button_list.append("Blue")
         elif b.button_violet.collidepoint((mouse)):
             if click:
-                if "Violet" in clicked_button:
-                    clicked_button.remove("Violet")
+                if clicked_button["Violet"] == 1 or "Violet" in clicked_button_list:
+                    clicked_button["Violet"] = 0
+                    clicked_button_list.remove("Violet")
                 else:
-                    clicked_button.append("Violet")
-
+                    clicked_button["Violet"] = 1
+                    clicked_button_list.append("Violet")
         elif b.button_purple.collidepoint((mouse)):
             if click:
-                if "Purple" in clicked_button:
-                    clicked_button.remove("Purple")
+                if clicked_button["Purple"] == 1 or "Purple" in clicked_button_list:
+                    clicked_button["Purple"] = 0
+                    clicked_button_list.remove("Purple")
                 else:
-                    clicked_button.append("Purple")
-
+                    clicked_button["Purple"] = 1
+                    clicked_button_list.append("Purple")
         elif b.button_pink.collidepoint((mouse)):
             if click:
-                if "Pink" in clicked_button:
-                    clicked_button.remove("Pink")
+                if clicked_button["Pink"] == 1 or "Pink" in clicked_button_list:
+                    clicked_button["Pink"] = 0
+                    clicked_button_list.remove("Pink")
                 else:
-                    clicked_button.append("Pink")
+                    clicked_button["Pink"] = 1
+                    clicked_button_list.append("Pink")
 
 
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
@@ -181,8 +203,7 @@ def main_menu():
         place_button(c.pink, b.button_pink)
 
 
-
-        print(clicked_button)
+        for single_color
 
         for event in pygame.event.get():
             if event.type == QUIT:
