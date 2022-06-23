@@ -138,71 +138,84 @@ def main_menu():
                     clicked_button_list.append("Beige")
         elif b.button_yellow.collidepoint((mouse)):
             if click:
-                if clicked_button["Yellow"] == 1 or (0, 0, 0) in clicked_button_list_codes or "Yellow" in clicked_button_list:
+                if clicked_button["Yellow"] == 1 or (255,255,0) in clicked_button_list_codes or "Yellow" in clicked_button_list:
                     clicked_button["Yellow"] = 0
-                    clicked_button_list_codes.remove((0, 0, 0))
+                    clicked_button_list_codes.remove((255,255,0))
                     clicked_button_list.remove("Yellow")
                 else:
                     clicked_button["Yellow"] = 1
-                    clicked_button_list_codes.append((0, 0, 0))
+                    clicked_button_list_codes.append((255,255,0))
                     clicked_button_list.append("Yellow")
         elif b.button_green.collidepoint((mouse)):
             if click:
-                if clicked_button["Green"] == 1 or (0,128,0) in clicked_button_list:
+                if clicked_button["Green"] == 1 or (0,128,0) in clicked_button_list_codes or "Green" in clicked_button_list:
                     clicked_button["Green"] = 0
-                    clicked_button_list.remove((0,128,0))
+                    clicked_button_list_codes.remove((0,128,0))
+                    clicked_button_list.remove("Green")
                 else:
                     clicked_button["Green"] = 1
-                    clicked_button_list.append((0,128,0))
+                    clicked_button_list_codes.append((0,128,0))
+                    clicked_button_list.append("Green")
         elif b.button_turqoise.collidepoint((mouse)):
             if click:
-                if clicked_button["Turqoise"] == 1 or (64,224,208) in clicked_button_list:
+                if clicked_button["Turqoise"] == 1 or (64,224,208) in clicked_button_list_codes or "Turqoise" in clicked_button_list:
                     clicked_button["Turqoise"] = 0
-                    clicked_button_list.remove((64,224,208))
+                    clicked_button_list_codes.remove((64,224,208))
+                    clicked_button_list.remove("Turqoise")
                 else:
                     clicked_button["Turqoise"] = 1
-                    clicked_button_list.append((64,224,208))
+                    clicked_button_list_codes.append((64,224,208))
+                    clicked_button_list.append("Turqoise")
         elif b.button_teal.collidepoint((mouse)):
             if click:
-                if clicked_button["Teal"] == 1 or (0,128,128) in clicked_button_list:
+                if clicked_button["Teal"] == 1 or (0,128,128) in clicked_button_list_codes or "Teal" in clicked_button_list:
                     clicked_button["Teal"] = 0
-                    clicked_button_list.remove((0,128,128))
+                    clicked_button_list_codes.remove((0,128,128))
+                    clicked_button_list.remove("Teal")
                 else:
                     clicked_button["Teal"] = 1
-                    clicked_button_list.append((0,128,128))
+                    clicked_button_list_codes.append((0,128,128))
+                    clicked_button_list.append("Teal")
         elif b.button_blue.collidepoint((mouse)):
             if click:
-                if clicked_button["Blue"] == 1 or (0,0,255) in clicked_button_list:
+                if clicked_button["Blue"] == 1 or (0,0,255) in clicked_button_list_codes or "Blue" in clicked_button_list:
                     clicked_button["Blue"] = 0
-                    clicked_button_list.remove((0,0,255))
+                    clicked_button_list_codes.remove((0,0,255))
+                    clicked_button_list.remove("Blue")
                 else:
                     clicked_button["Blue"] = 1
-                    clicked_button_list.append((0,0,255))
+                    clicked_button_list_codes.append((0,0,255))
+                    clicked_button_list.append("Blue")
         elif b.button_violet.collidepoint((mouse)):
             if click:
-                if clicked_button["Violet"] == 1 or (238,130,238) in clicked_button_list:
+                if clicked_button["Violet"] == 1 or (238,130,238) in clicked_button_list_codes or "Violet" in clicked_button_list:
                     clicked_button["Violet"] = 0
-                    clicked_button_list.remove((238,130,238))
+                    clicked_button_list_codes.remove((238,130,238))
+                    clicked_button_list.remove("Violet")
                 else:
                     clicked_button["Violet"] = 1
-                    clicked_button_list.append((238,130,238))
+                    clicked_button_list_codes.append((238,130,238))
+                    clicked_button_list.append("Violet")
         elif b.button_purple.collidepoint((mouse)):
             if click:
-                if clicked_button["Purple"] == 1 or (128,0,128) in clicked_button_list:
+                if clicked_button["Purple"] == 1 or (128,0,128) in clicked_button_list_codes or "Purple" in clicked_button_list:
                     clicked_button["Purple"] = 0
-                    clicked_button_list.remove((128,0,128))
+                    clicked_button_list_codes.remove((128,0,128))
+                    clicked_button_list.remove("Purple")
                 else:
                     clicked_button["Purple"] = 1
-                    clicked_button_list.append((128,0,128))
+                    clicked_button_list_codes.append((128,0,128))
+                    clicked_button_list.append("Purple")
         elif b.button_pink.collidepoint((mouse)):
             if click:
-                if clicked_button["Pink"] == 1 or (255,105,180) in clicked_button_list:
+                if clicked_button["Pink"] == 1 or (255,105,180) in clicked_button_list_codes or "Pink" in clicked_button_list:
                     clicked_button["Pink"] = 0
-                    clicked_button_list.remove((255,105,180))
+                    clicked_button_list_codes.remove((255,105,180))
+                    clicked_button_list.remove("Pink")
                 else:
                     clicked_button["Pink"] = 1
-                    clicked_button_list.append((255,105,180))
-
+                    clicked_button_list_codes.append((255,105,180))
+                    clicked_button_list.append("Pink")
 
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
         click = False
@@ -226,7 +239,7 @@ def main_menu():
         place_button(c.pink, b.button_pink)
 
 
-        print(clicked_button_list)
+        print(clicked_button_list_codes)
 
         for single_color in clicked_button_list:
             draw_text(single_color, font, c.black, screen, 650, y_pos)
