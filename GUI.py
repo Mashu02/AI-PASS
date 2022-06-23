@@ -303,5 +303,6 @@ def feedback():
 
         pygame.display.update()
         mainClock.tick(60)
+#pak die dictionary en dan values en dan in de algo doen
 
 main_menu()
