@@ -207,7 +207,7 @@ def main_menu():
 
         for single_color in clicked_button_list:
             draw_text(single_color, font, c.black, screen, 650, y_pos)
-            y_pos += 15
+            y_pos += 18
 
         for event in pygame.event.get():
             if event.type == QUIT:
