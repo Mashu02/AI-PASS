@@ -219,14 +219,9 @@ def main_menu():
                     clicked_button["Pink"] = 1
                     clicked_button_list_codes.append((255,105,180))
                     clicked_button_list.append("Pink")
-
         elif button_generate.collidepoint((mouse)):
             if click:
-                algo.create_image(clicked_button_list_codes)
-                randomly_generated_image = Image.open(r'image.png')
-                pygame_surface = algo.pilImageToSurface(randomly_generated_image)
-                pygame_surface = pygame.transform.smoothscale(pygame_surface, (650,650))
-                screen.blit(pygame_surface, (950, 60))
+                generate()
 
 
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
@@ -270,7 +265,27 @@ def main_menu():
         pygame.display.update()
         mainClock.tick(60)
 
+def generate():
+    running = True
+    while running:
+        screen.fill((240,255,255))
+        draw_text('generated', font, c.black, screen, 20, 20)
+        algo.create_image(clicked_button_list_codes)
+        randomly_generated_image = Image.open(r'image.png')
+        pygame_surface = algo.pilImageToSurface(randomly_generated_image)
+        pygame_surface = pygame.transform.smoothscale(pygame_surface, (650, 650))
+        screen.blit(pygame_surface, (950, 60))
 
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    running = False
+
+        pygame.display.update()
+        mainClock.tick(60)
 
 def feedback():
     running = True
