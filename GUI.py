@@ -1,6 +1,5 @@
 import sys
 import pygame
-import buttons
 import colors as c
 import buttons as b
 
@@ -15,6 +14,8 @@ screen = pygame.display.set_mode((1700, 900))
 pygame.display.set_caption('color matcher')
 font = pygame.font.SysFont(None, 20)
 click = False
+
+
 clicked_button = {"Black" : 0,  "Grey" : 0,  "Silver" : 0,  "White" : 0,  "Brown" : 0,
                   "Red" : 0,  "Orange" : 0,  "Gold" : 0,  "Beige" : 0,  "Yellow" : 0,
                   "Green" : 0,  "Turqoise" : 0,  "Teal" : 0,  "Blue" : 0,  "Violet" : 0,
@@ -35,7 +36,8 @@ def main_menu():
 
         screen.fill((240,255,255))
         draw_text('pick colors', font, c.black, screen, 20, 20)
-
+        draw_text('selected colors', font, c.black, screen, 650, 80)
+        y_pos = 100
         mouse = pygame.mouse.get_pos()
 
 
@@ -203,7 +205,9 @@ def main_menu():
         place_button(c.pink, b.button_pink)
 
 
-        for single_color
+        for single_color in clicked_button_list:
+            draw_text(single_color, font, c.black, screen, 650, y_pos)
+            y_pos += 15
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -222,13 +226,6 @@ def main_menu():
 
 
 #MOET NOG DE INPUT IN EEN LIJST KRIJGEN
-
-
-
-
-
-
-
 
 
 def feedback():

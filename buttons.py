@@ -1,8 +1,5 @@
 import pygame
 
-
-
-
 button_black = pygame.Rect(80, 100, 100, 100)
 button_grey = pygame.Rect(230, 100, 100, 100)
 button_silver = pygame.Rect(380, 100, 100, 100)
