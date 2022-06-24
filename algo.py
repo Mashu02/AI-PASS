@@ -45,11 +45,10 @@ def most_picks(combination_nummer):
     c = Counter()
     for combination in df_list:
         c[str(combination)] += 1
-    # print 13 komt 13 keer voor
-    print(c[combination_nummer])
+    return (c[combination_nummer])
 
 
-# most_picks('[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]')
+#print(most_picks(str([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])))
 
 
 # https://en.wikipedia.org/wiki/Cosine_similarity

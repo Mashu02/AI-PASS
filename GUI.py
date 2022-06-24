@@ -294,6 +294,11 @@ def generate():
 def feedback():
     running = True
     while running:
+        y_pos = 353
+        y_pos2 = 353
+        y_pos3 = 353
+        y_pos4 = 353
+        y_pos5 = 353
         color_code_feedback = []
         screen.fill((240,255,255))
         draw_text('feedback', font, c.black, screen, 20, 20)
@@ -307,36 +312,84 @@ def feedback():
             x = (algo.list_to_color(color_zero_one))
             color_code_feedback.append(x)
 
+
+
+        color_names = color_code_feedback[0]
+        for single_color in color_names:
+            color_name_single = algo.get_key(single_color)
+            draw_text(color_name_single, font, c.black, screen, 20, y_pos)
+            y_pos += 18
+        top_1_count = list(algoritme_uitkomst[0])
+        most_picks_1 = algo.most_picks(str(top_1_count))
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 20, 335)
         algo.create_image(color_code_feedback[0], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (20, 40))
 
-        #nog doen welke kleuren erin zitten
+
+
+        color_names = color_code_feedback[1]
+        for single_color in color_names:
+            color_name_single = algo.get_key(single_color)
+            draw_text(color_name_single, font, c.black, screen, 315, y_pos2)
+            y_pos2 += 18
+        top_1_count = list(algoritme_uitkomst[1])
+        most_picks_1 = algo.most_picks(str(top_1_count))
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 315, 335)
         algo.create_image(color_code_feedback[1], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (315, 40))
 
+
+
+        color_names = color_code_feedback[2]
+        for single_color in color_names:
+            color_name_single = algo.get_key(single_color)
+            draw_text(color_name_single, font, c.black, screen, 610, y_pos3)
+            y_pos3 += 18
+        top_1_count = list(algoritme_uitkomst[2])
+        most_picks_1 = algo.most_picks(str(top_1_count))
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 610, 335)
         algo.create_image(color_code_feedback[2], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (610, 40))
 
+
+        color_names = color_code_feedback[3]
+        for single_color in color_names:
+            color_name_single = algo.get_key(single_color)
+            draw_text(color_name_single, font, c.black, screen, 905, y_pos4)
+            y_pos4 += 18
+        top_1_count = list(algoritme_uitkomst[3])
+        most_picks_1 = algo.most_picks(str(top_1_count))
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 905, 335)
         algo.create_image(color_code_feedback[3], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (905, 40))
 
+        color_names = color_code_feedback[4]
+        for single_color in color_names:
+            color_name_single = algo.get_key(single_color)
+            draw_text(color_name_single, font, c.black, screen, 1200, y_pos5)
+            y_pos5 += 18
+        top_1_count = list(algoritme_uitkomst[4])
+        most_picks_1 = algo.most_picks(str(top_1_count))
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 1200, 335)
         algo.create_image(color_code_feedback[4], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (1200, 40))
+
+
 
         for event in pygame.event.get():
             if event.type == QUIT:
