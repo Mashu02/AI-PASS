@@ -46,6 +46,7 @@ def most_picks(combination_nummer):
 
 
 # https://en.wikipedia.org/wiki/Cosine_similarity
+#algoritme cosine similarity
 def cosine_sim(lijst, top_hoeveel):
     combination_with_cosim = {}
     for x in df_list:
@@ -57,7 +58,6 @@ def cosine_sim(lijst, top_hoeveel):
             sumA += i * i
             sumB += j * j
         cossim = sum / ((sqrt(sumA)) * (sqrt(sumB)))
-
         combination_with_cosim[tuple(x)] = cossim
 
     # remove de input

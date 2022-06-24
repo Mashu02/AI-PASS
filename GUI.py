@@ -307,6 +307,36 @@ def feedback():
 
         print(color_code_feedback)
 
+        algo.create_image(color_code_feedback[0], 270)
+        randomly_generated_image1 = Image.open(r'image.png')
+        pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
+        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (250, 250))
+        screen.blit(pygame_surface_top1, (20, 40))
+
+        algo.create_image(color_code_feedback[1], 270)
+        randomly_generated_image1 = Image.open(r'image.png')
+        pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
+        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (250, 250))
+        screen.blit(pygame_surface_top1, (340, 40))
+
+        algo.create_image(color_code_feedback[2], 270)
+        randomly_generated_image1 = Image.open(r'image.png')
+        pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
+        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (250, 250))
+        screen.blit(pygame_surface_top1, (660, 40))
+
+        algo.create_image(color_code_feedback[3], 270)
+        randomly_generated_image1 = Image.open(r'image.png')
+        pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
+        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (250, 250))
+        screen.blit(pygame_surface_top1, (980, 40))
+
+        algo.create_image(color_code_feedback[4], 270)
+        randomly_generated_image1 = Image.open(r'image.png')
+        pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
+        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (250, 250))
+        screen.blit(pygame_surface_top1, (1200, 40))
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
