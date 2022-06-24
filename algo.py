@@ -23,11 +23,21 @@ def get_key(val):
 
 #om een size x size image te genereren met gegeven kleuren maar random plek
 def create_image(colors, size):
+
     image = Image.new('RGB', (size, size))
     for x in range(image.width):
         for y in range(image.height):
             image.putpixel((x, y), random.choice(colors))
     image.save('image.png')
+
+
+
+def create_image2(colors, size):
+    image = Image.new('RGB', (size, size))
+    for x in range(image.width):
+        for y in range(image.height):
+            image.putpixel((x, y), random.choice(colors))
+    image.save('image2.png')
 
 # om van de keys uit dictionary naar rgb code
 def list_to_color(tuple):
@@ -46,9 +56,6 @@ def most_picks(combination_nummer):
     for combination in df_list:
         c[str(combination)] += 1
     return (c[combination_nummer])
-
-
-#print(most_picks(str([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])))
 
 
 # https://en.wikipedia.org/wiki/Cosine_similarity
@@ -77,3 +84,31 @@ def cosine_sim(lijst, top_hoeveel, input_user):
     top_dic_keys = list(top_dic.keys())
     # return list met top 5 als string
     return top_dic_keys
+
+
+def cosine_sim_score(lijst, top_hoeveel, input_user):
+    combination_with_cosim = {}
+    for x in df_list:
+        sum = 0
+        sumA = 0
+        sumB = 0
+        for i, j in zip(x, lijst):
+            sum += i * j
+            sumA += i * i
+            sumB += j * j
+        cossim = sum / ((sqrt(sumA)) * (sqrt(sumB)))
+        combination_with_cosim[tuple(x)] = cossim
+
+    # remove de input
+    if input_user not in combination_with_cosim:
+        pass
+    else:
+        del combination_with_cosim[input_user]
+
+    # de top waardes in een dictionary
+    top_dic = dict(Counter(combination_with_cosim).most_common(top_hoeveel))
+    top_dic_values = list(top_dic.values())
+    # return list met top 5 als string
+    return top_dic_values
+
+

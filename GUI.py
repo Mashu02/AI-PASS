@@ -25,6 +25,7 @@ clicked_button_list = []
 clicked_button_list_codes = []
 
 
+
 def place_button(button, button_color):
     return pygame.draw.rect(screen, button, button_color)
 
@@ -229,22 +230,41 @@ def main_menu():
         pygame.draw.rect(screen, (211, 211, 211), button_generate)
         click = False
 
+
+
+        place_button(c.black, b.out_button_black)
         place_button(c.black, b.button_black)
+        place_button(c.black, b.out_button_grey)
         place_button(c.grey, b.button_grey)
+        place_button(c.black, b.out_button_silver)
         place_button(c.silver, b.button_silver)
+        place_button(c.black, b.out_button_white)
         place_button(c.white, b.button_white)
+        place_button(c.black, b.out_button_brown)
         place_button(c.brown, b.button_brown)
+        place_button(c.black, b.out_button_red)
         place_button(c.red, b.button_red)
+        place_button(c.black, b.out_button_orange)
         place_button(c.orange, b.button_orange)
+        place_button(c.black, b.out_button_gold)
         place_button(c.gold, b.button_gold)
+        place_button(c.black, b.out_button_beige)
         place_button(c.beige, b.button_beige)
+        place_button(c.black, b.out_button_yellow)
         place_button(c.yellow, b.button_yellow)
+        place_button(c.black, b.out_button_green)
         place_button(c.green, b.button_green)
+        place_button(c.black, b.out_button_turqoise)
         place_button(c.turqoise, b.button_turqoise)
+        place_button(c.black, b.out_button_teal)
         place_button(c.teal, b.button_teal)
+        place_button(c.black, b.out_button_blue)
         place_button(c.blue, b.button_blue)
+        place_button(c.black, b.out_button_violet)
         place_button(c.violet, b.button_violet)
+        place_button(c.black, b.out_button_purple)
         place_button(c.purple, b.button_purple)
+        place_button(c.black, b.out_button_pink)
         place_button(c.pink, b.button_pink)
 
         for single_color in clicked_button_list:
@@ -294,31 +314,44 @@ def generate():
 def feedback():
     running = True
     while running:
-        y_pos = 353
-        y_pos2 = 353
-        y_pos3 = 353
-        y_pos4 = 353
-        y_pos5 = 353
+        y_pos = 379
+        y_pos2 = 379
+        y_pos3 = 379
+        y_pos4 = 379
+        y_pos5 = 379
+
+        y_pos6 = 779
+        y_pos7 = 779
+        y_pos8 = 779
+        y_pos9 = 779
+        y_pos10 = 779
         color_code_feedback = []
+        color_score_list = []
         screen.fill((240,255,255))
         draw_text('feedback', font, c.black, screen, 20, 20)
 
         input = clicked_button.values()
         input_tuple = tuple(input)
 
-        algoritme_uitkomst = algo.cosine_sim(input, 5, input_tuple)
+        algoritme_uitkomst = algo.cosine_sim(input, 10, input_tuple)
+        algoritme_score = algo.cosine_sim_score(input, 10, input_tuple)
 
         for color_zero_one in algoritme_uitkomst:
             x = (algo.list_to_color(color_zero_one))
             color_code_feedback.append(x)
 
+        for single_score in algoritme_score:
+            score_percent = single_score * 100
+            score_percent2 = round(score_percent, 2)
+            color_score_list.append(score_percent2)
 
-
+        score_color_percent = str(color_score_list[0])
         color_names = color_code_feedback[0]
+        draw_text(score_color_percent + "%", font, c.black, screen, 20, 357)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
-            draw_text(color_name_single, font, c.black, screen, 20, y_pos)
-            y_pos += 18
+            draw_text("-" + color_name_single, font, c.black, screen, 20, y_pos)
+            y_pos += 19
         top_1_count = list(algoritme_uitkomst[0])
         most_picks_1 = algo.most_picks(str(top_1_count))
         draw_text(str(most_picks_1) + " votes", font, c.black, screen, 20, 335)
@@ -328,13 +361,13 @@ def feedback():
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (20, 40))
 
-
-
+        score_color_percent = str(color_score_list[1])
         color_names = color_code_feedback[1]
+        draw_text(score_color_percent + "%", font, c.black, screen, 315, 357)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
-            draw_text(color_name_single, font, c.black, screen, 315, y_pos2)
-            y_pos2 += 18
+            draw_text("-" + color_name_single, font, c.black, screen, 315, y_pos2)
+            y_pos2 += 19
         top_1_count = list(algoritme_uitkomst[1])
         most_picks_1 = algo.most_picks(str(top_1_count))
         draw_text(str(most_picks_1) + " votes", font, c.black, screen, 315, 335)
@@ -345,12 +378,13 @@ def feedback():
         screen.blit(pygame_surface_top1, (315, 40))
 
 
-
+        score_color_percent = str(color_score_list[2])
         color_names = color_code_feedback[2]
+        draw_text(score_color_percent + "%", font, c.black, screen, 610, 357)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
-            draw_text(color_name_single, font, c.black, screen, 610, y_pos3)
-            y_pos3 += 18
+            draw_text("-" + color_name_single, font, c.black, screen, 610, y_pos3)
+            y_pos3 += 19
         top_1_count = list(algoritme_uitkomst[2])
         most_picks_1 = algo.most_picks(str(top_1_count))
         draw_text(str(most_picks_1) + " votes", font, c.black, screen, 610, 335)
@@ -360,12 +394,13 @@ def feedback():
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (610, 40))
 
-
+        score_color_percent = str(color_score_list[3])
         color_names = color_code_feedback[3]
+        draw_text(score_color_percent + "%", font, c.black, screen, 905, 357)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
-            draw_text(color_name_single, font, c.black, screen, 905, y_pos4)
-            y_pos4 += 18
+            draw_text("-" + color_name_single, font, c.black, screen, 905, y_pos4)
+            y_pos4 += 19
         top_1_count = list(algoritme_uitkomst[3])
         most_picks_1 = algo.most_picks(str(top_1_count))
         draw_text(str(most_picks_1) + " votes", font, c.black, screen, 905, 335)
@@ -375,11 +410,14 @@ def feedback():
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (905, 40))
 
+
+        score_color_percent = str(color_score_list[4])
         color_names = color_code_feedback[4]
+        draw_text(score_color_percent + "%", font, c.black, screen, 1200, 357)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
-            draw_text(color_name_single, font, c.black, screen, 1200, y_pos5)
-            y_pos5 += 18
+            draw_text("-" + color_name_single, font, c.black, screen, 1200, y_pos5)
+            y_pos5 += 19
         top_1_count = list(algoritme_uitkomst[4])
         most_picks_1 = algo.most_picks(str(top_1_count))
         draw_text(str(most_picks_1) + " votes", font, c.black, screen, 1200, 335)
@@ -389,7 +427,85 @@ def feedback():
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (1200, 40))
 
+        score_color_percent = str(color_score_list[5])
+        color_names = color_code_feedback[5]
+        draw_text(score_color_percent + "%", font, c.black, screen, 20, 757)
+        for single_color in color_names:
+            color_name_single = algo.get_key(single_color)
+            draw_text("-" + color_name_single, font, c.black, screen, 20, y_pos6)
+            y_pos6 += 19
+        top_1_count = list(algoritme_uitkomst[5])
+        most_picks_1 = algo.most_picks(str(top_1_count))
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 20, 735)
+        algo.create_image2(color_code_feedback[5], 270)
+        randomly_generated_image2 = Image.open(r'image2.png')
+        pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
+        pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
+        screen.blit(pygame_surface_top2, (20, 450))
 
+        score_color_percent = str(color_score_list[6])
+        color_names = color_code_feedback[6]
+        draw_text(score_color_percent + "%", font, c.black, screen, 315, 757)
+        for single_color in color_names:
+            color_name_single = algo.get_key(single_color)
+            draw_text("-" + color_name_single, font, c.black, screen, 315, y_pos7)
+            y_pos7 += 19
+        top_1_count = list(algoritme_uitkomst[6])
+        most_picks_1 = algo.most_picks(str(top_1_count))
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 315, 735)
+        algo.create_image2(color_code_feedback[6], 270)
+        randomly_generated_image2 = Image.open(r'image2.png')
+        pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
+        pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
+        screen.blit(pygame_surface_top2, (315, 450))
+
+        score_color_percent = str(color_score_list[7])
+        color_names = color_code_feedback[7]
+        draw_text(score_color_percent + "%", font, c.black, screen, 610, 757)
+        for single_color in color_names:
+            color_name_single = algo.get_key(single_color)
+            draw_text("-" + color_name_single, font, c.black, screen, 610, y_pos8)
+            y_pos8 += 19
+        top_1_count = list(algoritme_uitkomst[7])
+        most_picks_1 = algo.most_picks(str(top_1_count))
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 610, 735)
+        algo.create_image2(color_code_feedback[7], 270)
+        randomly_generated_image2 = Image.open(r'image2.png')
+        pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
+        pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
+        screen.blit(pygame_surface_top2, (610, 450))
+
+        score_color_percent = str(color_score_list[8])
+        color_names = color_code_feedback[8]
+        draw_text(score_color_percent + "%", font, c.black, screen, 905, 757)
+        for single_color in color_names:
+            color_name_single = algo.get_key(single_color)
+            draw_text("-" + color_name_single, font, c.black, screen, 905, y_pos9)
+            y_pos9 += 19
+        top_1_count = list(algoritme_uitkomst[8])
+        most_picks_1 = algo.most_picks(str(top_1_count))
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 905, 735)
+        algo.create_image2(color_code_feedback[8], 270)
+        randomly_generated_image2 = Image.open(r'image2.png')
+        pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
+        pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
+        screen.blit(pygame_surface_top2, (905, 450))
+
+        score_color_percent = str(color_score_list[9])
+        color_names = color_code_feedback[9]
+        draw_text(score_color_percent + "%", font, c.black, screen, 1200, 757)
+        for single_color in color_names:
+            color_name_single = algo.get_key(single_color)
+            draw_text("-" + color_name_single, font, c.black, screen, 1200, y_pos10)
+            y_pos10 += 19
+        top_1_count = list(algoritme_uitkomst[9])
+        most_picks_1 = algo.most_picks(str(top_1_count))
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 1200, 735)
+        algo.create_image2(color_code_feedback[9], 270)
+        randomly_generated_image2 = Image.open(r'image2.png')
+        pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
+        pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
+        screen.blit(pygame_surface_top2, (1200, 450))
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -398,11 +514,7 @@ def feedback():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     running = False
-
         pygame.display.update()
         mainClock.tick(60)
-
-
-
 
 main_menu()
