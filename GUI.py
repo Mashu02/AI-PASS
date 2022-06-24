@@ -300,7 +300,7 @@ def feedback():
 
         input = clicked_button.values()
         input_tuple = tuple(input)
-        print(input_tuple)
+
         algoritme_uitkomst = algo.cosine_sim(input, 5, input_tuple)
 
         for color_zero_one in algoritme_uitkomst:
@@ -313,6 +313,7 @@ def feedback():
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (20, 40))
 
+        #nog doen welke kleuren erin zitten
         algo.create_image(color_code_feedback[1], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)

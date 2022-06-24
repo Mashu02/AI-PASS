@@ -21,4 +21,3 @@ button_violet = pygame.Rect(380, 550, 100, 100)
 button_purple = pygame.Rect(530, 550, 100, 100)
 
 button_pink = pygame.Rect(80, 700, 100, 100)
-

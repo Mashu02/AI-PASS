@@ -4,6 +4,7 @@ from collections import Counter
 import random
 from PIL import Image
 import pygame
+import colors as c
 
 #kleuren van algoritme naar rgb codes
 colors = [(0, 0, 0), (128, 128, 128), (192, 192, 192), (255, 255, 255), (139, 69, 19), (255, 0, 0)
@@ -12,6 +13,12 @@ colors = [(0, 0, 0), (128, 128, 128), (192, 192, 192), (255, 255, 255), (139, 69
 
 df = pd.read_csv('data_full_full.csv', sep=';')
 df_list = df.values.tolist()
+
+# voor rbg value naar text
+def get_key(val):
+    for key, value in c.color_with_rbg.items():
+        if val == value:
+            return key
 
 
 #om een size x size image te genereren met gegeven kleuren maar random plek
@@ -59,9 +66,12 @@ def cosine_sim(lijst, top_hoeveel, input_user):
             sumB += j * j
         cossim = sum / ((sqrt(sumA)) * (sqrt(sumB)))
         combination_with_cosim[tuple(x)] = cossim
-    print(combination_with_cosim)
+
     # remove de input
-    del combination_with_cosim[(input_user)]
+    if input_user.count(1) == 1:
+        pass
+    else:
+        del combination_with_cosim[input_user]
 
     # de top waardes in een dictionary
     top_dic = dict(Counter(combination_with_cosim).most_common(top_hoeveel))
