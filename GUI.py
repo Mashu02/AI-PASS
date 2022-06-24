@@ -11,7 +11,7 @@ pygame.init()
 
 
 #screen
-screen = pygame.display.set_mode((1700, 900))
+screen = pygame.display.set_mode((1536, 900))
 pygame.display.set_caption('color matcher')
 font = pygame.font.SysFont(None, 20)
 click = False
@@ -23,6 +23,7 @@ clicked_button = {"Black" : 0,  "Grey" : 0,  "Silver" : 0,  "White" : 0,  "Brown
                   "Purple" : 0,  "Pink" : 0}
 clicked_button_list = []
 clicked_button_list_codes = []
+
 
 def place_button(button, button_color):
     return pygame.draw.rect(screen, button, button_color)
@@ -44,7 +45,7 @@ def main_menu():
         mouse = pygame.mouse.get_pos()
 
         button_generate = pygame.Rect(765, 80, 100, 30)
-        button_feedback = pygame.Rect(1445, 800, 200, 50)
+        button_feedback = pygame.Rect(1300, 800, 175, 50)
 
         if button_feedback.collidepoint((mouse)):
             if click:
@@ -262,6 +263,8 @@ def main_menu():
                 if event.button == 1:
                     click = True
 
+
+
         pygame.display.update()
         mainClock.tick(60)
 
@@ -270,11 +273,12 @@ def generate():
     while running:
         screen.fill((240,255,255))
         draw_text('generated', font, c.black, screen, 20, 20)
-        algo.create_image(clicked_button_list_codes)
-        randomly_generated_image = Image.open(r'image.png')
-        pygame_surface = algo.pilImageToSurface(randomly_generated_image)
-        pygame_surface = pygame.transform.smoothscale(pygame_surface, (650, 650))
-        screen.blit(pygame_surface, (950, 60))
+
+        algo.create_image(clicked_button_list_codes, 500)
+        randomly_generated_image1 = Image.open(r'image.png')
+        pygame_surface1 = algo.pilImageToSurface(randomly_generated_image1)
+        pygame_surface1 = pygame.transform.smoothscale(pygame_surface1, (650, 650))
+        screen.blit(pygame_surface1, (750, 60))
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -290,9 +294,19 @@ def generate():
 def feedback():
     running = True
     while running:
+        color_code_feedback = []
         screen.fill((240,255,255))
-
         draw_text('feedback', font, c.black, screen, 20, 20)
+
+        input = clicked_button.values()
+        algoritme_uitkomst = algo.cosine_sim(input, 5)
+
+        for color_zero_one in algoritme_uitkomst:
+            x = (algo.list_to_color(color_zero_one))
+            color_code_feedback.append(x)
+
+        print(color_code_feedback)
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -303,6 +317,8 @@ def feedback():
 
         pygame.display.update()
         mainClock.tick(60)
-#pak die dictionary en dan values en dan in de algo doen
+
+
+
 
 main_menu()

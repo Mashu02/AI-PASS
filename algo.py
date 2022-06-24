@@ -5,31 +5,44 @@ import random
 from PIL import Image
 import pygame
 
+#kleuren van algoritme naar rgb codes
+colors = [(0, 0, 0), (128, 128, 128), (192, 192, 192), (255, 255, 255), (139, 69, 19), (255, 0, 0)
+          , (255, 150, 0), (255, 215, 0), (245, 245, 220), (255, 255, 0), (0, 128, 0), (64, 224, 208), (0, 128, 128)
+          , (0, 0, 255), (238, 130, 238), (128, 0, 128), (255, 105, 180)]
+
 df = pd.read_csv('data_full_full.csv', sep=';')
 df_list = df.values.tolist()
 list_user = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
 
-def create_image(colors):
-    image = Image.new('RGB', (500, 500))
+#om een size x size image te genereren met gegeven kleuren maar random plek
+def create_image(colors, size):
+    image = Image.new('RGB', (size, size))
     for x in range(image.width):
         for y in range(image.height):
             image.putpixel((x, y), random.choice(colors))
     image.save('image.png')
 
+# om van de keys uit dictionary naar rgb code
+def list_to_color(tuple):
+    return [color for keep, color in zip(tuple, colors) if keep]
+
+#voor PIL image naar pygame
 def pilImageToSurface(pilImage):
     return pygame.image.fromstring(
         pilImage.tobytes(), pilImage.size, pilImage.mode).convert()
 
-#wil ik doen bij de top 5 combinaties hoevaak die voor komt
+
+# wil ik doen bij de top 5 combinaties hoevaak die voor komt
+#telt hoevaak kleur combinatie is voorgekomen
 def most_picks(combination_nummer):
     c = Counter()
     for combination in df_list:
         c[str(combination)] += 1
-    #print 13 komt 13 keer voor
+    # print 13 komt 13 keer voor
     print(c[combination_nummer])
 
-#most_picks('[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]')
 
+# most_picks('[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]')
 
 
 # https://en.wikipedia.org/wiki/Cosine_similarity
@@ -44,19 +57,14 @@ def cosine_sim(lijst, top_hoeveel):
             sumA += i * i
             sumB += j * j
         cossim = sum / ((sqrt(sumA)) * (sqrt(sumB)))
-        combination_with_cosim[str(x)] = cossim
 
-    #remove de input
-    del combination_with_cosim[str(list_user)]
+        combination_with_cosim[tuple(x)] = cossim
 
-    #de top waardes in een dictionary
+    # remove de input
+    del combination_with_cosim[tuple(list_user)]
+
+    # de top waardes in een dictionary
     top_dic = dict(Counter(combination_with_cosim).most_common(top_hoeveel))
     top_dic_keys = list(top_dic.keys())
-    print(top_dic)
-    #return list met top 5 als string
+    # return list met top 5 als string
     return top_dic_keys
-
-
-#print(cosine_sim(list_user,5))
-
-
