@@ -68,7 +68,7 @@ def cosine_sim(lijst, top_hoeveel, input_user):
         combination_with_cosim[tuple(x)] = cossim
 
     # remove de input
-    if input_user.count(1) == 1:
+    if input_user not in combination_with_cosim:
         pass
     else:
         del combination_with_cosim[input_user]
