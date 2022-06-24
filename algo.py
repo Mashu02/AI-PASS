@@ -12,7 +12,7 @@ colors = [(0, 0, 0), (128, 128, 128), (192, 192, 192), (255, 255, 255), (139, 69
 
 df = pd.read_csv('data_full_full.csv', sep=';')
 df_list = df.values.tolist()
-list_user = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+
 
 #om een size x size image te genereren met gegeven kleuren maar random plek
 def create_image(colors, size):
@@ -47,7 +47,7 @@ def most_picks(combination_nummer):
 
 # https://en.wikipedia.org/wiki/Cosine_similarity
 #algoritme cosine similarity
-def cosine_sim(lijst, top_hoeveel):
+def cosine_sim(lijst, top_hoeveel, input_user):
     combination_with_cosim = {}
     for x in df_list:
         sum = 0
@@ -59,9 +59,9 @@ def cosine_sim(lijst, top_hoeveel):
             sumB += j * j
         cossim = sum / ((sqrt(sumA)) * (sqrt(sumB)))
         combination_with_cosim[tuple(x)] = cossim
-
+    print(combination_with_cosim)
     # remove de input
-    del combination_with_cosim[tuple(list_user)]
+    del combination_with_cosim[(input_user)]
 
     # de top waardes in een dictionary
     top_dic = dict(Counter(combination_with_cosim).most_common(top_hoeveel))

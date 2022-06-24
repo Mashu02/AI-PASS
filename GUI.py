@@ -299,42 +299,42 @@ def feedback():
         draw_text('feedback', font, c.black, screen, 20, 20)
 
         input = clicked_button.values()
-        algoritme_uitkomst = algo.cosine_sim(input, 5)
+        input_tuple = tuple(input)
+        print(input_tuple)
+        algoritme_uitkomst = algo.cosine_sim(input, 5, input_tuple)
 
         for color_zero_one in algoritme_uitkomst:
             x = (algo.list_to_color(color_zero_one))
             color_code_feedback.append(x)
 
-        print(color_code_feedback)
-
         algo.create_image(color_code_feedback[0], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
-        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (250, 250))
+        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (20, 40))
 
         algo.create_image(color_code_feedback[1], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
-        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (250, 250))
-        screen.blit(pygame_surface_top1, (340, 40))
+        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
+        screen.blit(pygame_surface_top1, (315, 40))
 
         algo.create_image(color_code_feedback[2], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
-        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (250, 250))
-        screen.blit(pygame_surface_top1, (660, 40))
+        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
+        screen.blit(pygame_surface_top1, (610, 40))
 
         algo.create_image(color_code_feedback[3], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
-        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (250, 250))
-        screen.blit(pygame_surface_top1, (980, 40))
+        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
+        screen.blit(pygame_surface_top1, (905, 40))
 
         algo.create_image(color_code_feedback[4], 270)
         randomly_generated_image1 = Image.open(r'image.png')
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
-        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (250, 250))
+        pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (1200, 40))
 
         for event in pygame.event.get():
