@@ -11,7 +11,7 @@ pygame.init()
 ####################################################BUTTON FEEDBACK ONDER DE KLEUREN EN TEXT SIZE VERANDEREN
 
 #screen
-screen = pygame.display.set_mode((1536, 900))
+screen = pygame.display.set_mode((1536, 870))
 pygame.display.set_caption('color matcher')
 font = pygame.font.SysFont(None, 20)
 click = False
@@ -43,11 +43,12 @@ def main_menu():
         screen.fill((240,255,255))
         draw_text('pick colors', pygame.font.SysFont(None, 50), c.black, screen, 275, 35)
         draw_text('selected colors', font, c.black, screen, 650, 80)
-        draw_text('generate', font, c.black, screen, 785, 60)
         y_pos = 100
         mouse = pygame.mouse.get_pos()
 
-        button_generate = pygame.Rect(765, 80, 100, 30)
+        button_generate = pygame.Rect(1170, 700, 301, 100)
+        button_generate_outline = pygame.Rect(1167, 697, 307, 106)
+
         button_feedback = pygame.Rect(230, 700, 401, 100)
         button_feedback_outline = pygame.Rect(227,697,407,106)
 
@@ -230,8 +231,11 @@ def main_menu():
 
         pygame.draw.rect(screen, c.black, button_feedback_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
+
+        pygame.draw.rect(screen, c.black, button_generate_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_generate)
-        draw_text('Result', pygame.font.SysFont(None, 70), c.black, screen, 350, 725)
+        draw_text('show result', pygame.font.SysFont(None, 60), c.black, screen, 310, 730)
+        draw_text('generate input', pygame.font.SysFont(None, 40), c.black, screen, 1215, 735)
         click = False
 
 
