@@ -15,19 +15,26 @@ screen = pygame.display.set_mode((1536, 870))
 pygame.display.set_caption('color matcher')
 font = pygame.font.SysFont(None, 20)
 click = False
-
+mouse = pygame.mouse.get_pos()
 clicked_button = {"Black" : 0,  "Grey" : 0,  "Silver" : 0,  "White" : 0,  "Brown" : 0,
                   "Red" : 0,  "Orange" : 0,  "Gold" : 0,  "Beige" : 0,  "Yellow" : 0,
                   "Green" : 0,  "Turqoise" : 0,  "Teal" : 0,  "Blue" : 0,  "Violet" : 0,
                   "Purple" : 0,  "Pink" : 0}
 clicked_button_list = []
 clicked_button_list_codes = []
-
+liked_color_combinations = []
+color_name_liked_combo = []
 
 
 def place_button(button, button_color):
     return pygame.draw.rect(screen, button, button_color)
 
+#voor button green en red buttons in feedback
+def place_liked_buttons(button_x, button_y,size):
+    green_button = pygame.Rect(button_x, button_y, size, size)
+    green_button_black_border = pygame.Rect(button_x - 3, button_y - 3, size + 6, size + 6)
+    pygame.draw.rect(screen, c.black, green_button_black_border)
+    pygame.draw.rect(screen, (102, 255, 0), green_button)
 
 
 
@@ -45,6 +52,7 @@ def main_menu():
         draw_text('selected colors', pygame.font.SysFont(None, 50), c.black, screen, 695, 35)
         draw_text('your liked combinations', pygame.font.SysFont(None, 50), c.black, screen, 1065, 35)
         y_pos = 92
+        y_pos_color_code = 92
         mouse = pygame.mouse.get_pos()
 
         button_generate = pygame.Rect(696, 700, 301, 100)
@@ -235,6 +243,7 @@ def main_menu():
 
         pygame.draw.rect(screen, c.black, button_generate_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_generate)
+
         draw_text('show result', pygame.font.SysFont(None, 60), c.black, screen, 310, 730)
         draw_text('generate input', pygame.font.SysFont(None, 40), c.black, screen, 746, 735)
         click = False
@@ -280,6 +289,10 @@ def main_menu():
         for single_color in clicked_button_list:
             draw_text("-"+single_color, pygame.font.SysFont(None, 25), c.black, screen, 685, y_pos)
             y_pos += 20
+
+        for liked_color_combo in liked_color_combinations:
+            draw_text(str(liked_color_combo), pygame.font.SysFont(None, 25), c.black, screen, 1100, y_pos_color_code)
+            y_pos_color_code += 25
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -341,6 +354,7 @@ def feedback():
         y_pos10 = 795
         color_code_feedback = []
         color_score_list = []
+        mouse = pygame.mouse.get_pos()
         screen.fill((240,255,255))
         draw_text('feedback', font, c.black, screen, 20, 20)
 
@@ -374,6 +388,11 @@ def feedback():
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (20, 40))
+        place_liked_buttons(135,350,40)
+        if 135 + 40 > mouse[0] > 135 and 350 + 40 > mouse[1] > 350:
+            if click and color_names not in liked_color_combinations:
+                liked_color_combinations.append(color_names)
+                draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,143,355)
 
         score_color_percent = str(color_score_list[1])
         color_names = color_code_feedback[1]
@@ -390,7 +409,11 @@ def feedback():
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (315, 40))
-
+        place_liked_buttons(430, 350, 40)
+        if 430 + 40 > mouse[0] > 430 and 350 + 40 > mouse[1] > 350:
+            if click and color_names not in liked_color_combinations:
+                liked_color_combinations.append(color_names)
+                draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,438,355)
 
         score_color_percent = str(color_score_list[2])
         color_names = color_code_feedback[2]
@@ -407,6 +430,11 @@ def feedback():
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (610, 40))
+        place_liked_buttons(725, 350, 40)
+        if 725 + 40 > mouse[0] > 725 and 350 + 40 > mouse[1] > 350:
+            if click and color_names not in liked_color_combinations:
+                liked_color_combinations.append(color_names)
+                draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,733,355)
 
         score_color_percent = str(color_score_list[3])
         color_names = color_code_feedback[3]
@@ -423,7 +451,11 @@ def feedback():
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (905, 40))
-
+        place_liked_buttons(1010, 350, 40)
+        if 1010 + 40 > mouse[0] > 1010 and 350 + 40 > mouse[1] > 350:
+            if click and color_names not in liked_color_combinations:
+                liked_color_combinations.append(color_names)
+                draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,1018,355)
 
         score_color_percent = str(color_score_list[4])
         color_names = color_code_feedback[4]
@@ -440,6 +472,11 @@ def feedback():
         pygame_surface_top1 = algo.pilImageToSurface(randomly_generated_image1)
         pygame_surface_top1 = pygame.transform.smoothscale(pygame_surface_top1, (275, 275))
         screen.blit(pygame_surface_top1, (1200, 40))
+        place_liked_buttons(1315, 350, 40)
+        if 1315 + 40 > mouse[0] > 1315 and 350 + 40 > mouse[1] > 350:
+            if click and color_names not in liked_color_combinations:
+                liked_color_combinations.append(color_names)
+                draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,1323,355)
 
         score_color_percent = str(color_score_list[5])
         color_names = color_code_feedback[5]
@@ -456,6 +493,11 @@ def feedback():
         pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
         pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
         screen.blit(pygame_surface_top2, (20, 465))
+        place_liked_buttons(135, 764, 40)
+        if 135 + 40 > mouse[0] > 135 and 764 + 40 > mouse[1] > 764:
+            if click and color_names not in liked_color_combinations:
+                liked_color_combinations.append(color_names)
+                draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,143,769)
 
         score_color_percent = str(color_score_list[6])
         color_names = color_code_feedback[6]
@@ -472,6 +514,11 @@ def feedback():
         pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
         pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
         screen.blit(pygame_surface_top2, (315, 465))
+        place_liked_buttons(430, 764, 40)
+        if 430 + 40 > mouse[0] > 430 and 764 + 40 > mouse[1] > 764:
+            if click and color_names not in liked_color_combinations:
+                liked_color_combinations.append(color_names)
+                draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,438,769)
 
         score_color_percent = str(color_score_list[7])
         color_names = color_code_feedback[7]
@@ -488,6 +535,11 @@ def feedback():
         pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
         pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
         screen.blit(pygame_surface_top2, (610, 465))
+        place_liked_buttons(725, 764, 40)
+        if 725 + 40 > mouse[0] > 725 and 764 + 40 > mouse[1] > 764:
+            if click and color_names not in liked_color_combinations:
+                liked_color_combinations.append(color_names)
+                draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,733,769)
 
         score_color_percent = str(color_score_list[8])
         color_names = color_code_feedback[8]
@@ -504,6 +556,11 @@ def feedback():
         pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
         pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
         screen.blit(pygame_surface_top2, (905, 465))
+        place_liked_buttons(1010, 764, 40)
+        if 1010 + 40 > mouse[0] > 1010 and 764 + 40 > mouse[1] > 764:
+            if click and color_names not in liked_color_combinations:
+                liked_color_combinations.append(color_names)
+                draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,1018,769)
 
         score_color_percent = str(color_score_list[9])
         color_names = color_code_feedback[9]
@@ -520,6 +577,13 @@ def feedback():
         pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
         pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
         screen.blit(pygame_surface_top2, (1200, 465))
+        place_liked_buttons(1315, 764, 40)
+        if 1315 + 40 > mouse[0] > 1315 and 764 + 40 > mouse[1] > 764:
+            if click and color_names not in liked_color_combinations:
+                liked_color_combinations.append(color_names)
+                draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,1323,769)
+
+        click = False
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -528,6 +592,9 @@ def feedback():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     running = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
         pygame.display.update()
         mainClock.tick(60)
 
