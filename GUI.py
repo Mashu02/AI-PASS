@@ -41,13 +41,14 @@ def main_menu():
     while True:
 
         screen.fill((240,255,255))
-        draw_text('pick colors', pygame.font.SysFont(None, 50), c.black, screen, 275, 35)
-        draw_text('selected colors', font, c.black, screen, 650, 80)
-        y_pos = 100
+        draw_text('pick color(s)', pygame.font.SysFont(None, 50), c.black, screen, 275, 35)
+        draw_text('selected colors', pygame.font.SysFont(None, 50), c.black, screen, 695, 35)
+        draw_text('your liked combinations', pygame.font.SysFont(None, 50), c.black, screen, 1065, 35)
+        y_pos = 92
         mouse = pygame.mouse.get_pos()
 
-        button_generate = pygame.Rect(1170, 700, 301, 100)
-        button_generate_outline = pygame.Rect(1167, 697, 307, 106)
+        button_generate = pygame.Rect(696, 700, 301, 100)
+        button_generate_outline = pygame.Rect(693, 697, 307, 106)
 
         button_feedback = pygame.Rect(230, 700, 401, 100)
         button_feedback_outline = pygame.Rect(227,697,407,106)
@@ -235,7 +236,7 @@ def main_menu():
         pygame.draw.rect(screen, c.black, button_generate_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_generate)
         draw_text('show result', pygame.font.SysFont(None, 60), c.black, screen, 310, 730)
-        draw_text('generate input', pygame.font.SysFont(None, 40), c.black, screen, 1215, 735)
+        draw_text('generate input', pygame.font.SysFont(None, 40), c.black, screen, 746, 735)
         click = False
 
 
@@ -274,9 +275,11 @@ def main_menu():
         place_button(c.black, b.out_button_pink)
         place_button(c.pink, b.button_pink)
 
+
+        #color list in selected
         for single_color in clicked_button_list:
-            draw_text(single_color, font, c.black, screen, 650, y_pos)
-            y_pos += 18
+            draw_text("-"+single_color, pygame.font.SysFont(None, 25), c.black, screen, 685, y_pos)
+            y_pos += 20
 
         for event in pygame.event.get():
             if event.type == QUIT:
