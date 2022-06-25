@@ -8,14 +8,13 @@ from PIL import Image
 
 mainClock = pygame.time.Clock()
 pygame.init()
-
+####################################################BUTTON FEEDBACK ONDER DE KLEUREN EN TEXT SIZE VERANDEREN
 
 #screen
 screen = pygame.display.set_mode((1536, 900))
 pygame.display.set_caption('color matcher')
 font = pygame.font.SysFont(None, 20)
 click = False
-
 
 clicked_button = {"Black" : 0,  "Grey" : 0,  "Silver" : 0,  "White" : 0,  "Brown" : 0,
                   "Red" : 0,  "Orange" : 0,  "Gold" : 0,  "Beige" : 0,  "Yellow" : 0,
@@ -29,6 +28,9 @@ clicked_button_list_codes = []
 def place_button(button, button_color):
     return pygame.draw.rect(screen, button, button_color)
 
+
+
+
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
@@ -39,14 +41,15 @@ def main_menu():
     while True:
 
         screen.fill((240,255,255))
-        draw_text('pick colors', font, c.black, screen, 20, 20)
+        draw_text('pick colors', pygame.font.SysFont(None, 50), c.black, screen, 275, 35)
         draw_text('selected colors', font, c.black, screen, 650, 80)
         draw_text('generate', font, c.black, screen, 785, 60)
         y_pos = 100
         mouse = pygame.mouse.get_pos()
 
         button_generate = pygame.Rect(765, 80, 100, 30)
-        button_feedback = pygame.Rect(1300, 800, 175, 50)
+        button_feedback = pygame.Rect(230, 700, 401, 100)
+        button_feedback_outline = pygame.Rect(227,697,407,106)
 
         if button_feedback.collidepoint((mouse)):
             if click:
@@ -221,15 +224,15 @@ def main_menu():
                     clicked_button["Pink"] = 1
                     clicked_button_list_codes.append((255,105,180))
                     clicked_button_list.append("Pink")
-        elif button_generate.collidepoint((mouse)):
+        if button_generate.collidepoint((mouse)):
             if click:
                 generate()
 
-
+        pygame.draw.rect(screen, c.black, button_feedback_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
         pygame.draw.rect(screen, (211, 211, 211), button_generate)
+        draw_text('Result', pygame.font.SysFont(None, 70), c.black, screen, 235, 725)
         click = False
-
 
 
         place_button(c.black, b.out_button_black)
@@ -283,22 +286,27 @@ def main_menu():
                 if event.button == 1:
                     click = True
 
-
-
         pygame.display.update()
         mainClock.tick(60)
 
 def generate():
+
     running = True
     while running:
+        y_pos = 135
         screen.fill((240,255,255))
-        draw_text('generated', font, c.black, screen, 20, 20)
-
+        draw_text('generated', pygame.font.SysFont(None, 35), c.black, screen, 500, 50)
         algo.create_image(clicked_button_list_codes, 500)
-        randomly_generated_image1 = Image.open(r'image.png')
-        pygame_surface1 = algo.pilImageToSurface(randomly_generated_image1)
-        pygame_surface1 = pygame.transform.smoothscale(pygame_surface1, (650, 650))
-        screen.blit(pygame_surface1, (750, 60))
+        randomly_generated_image1 = pygame.image.load('image.png')
+        screen.blit(randomly_generated_image1, (320, 100))
+
+        input_list_user = (list(clicked_button.values()))
+        top_count = algo.most_picks(str(input_list_user))
+        draw_text(str(top_count) + " votes", pygame.font.SysFont(None, 30), c.black, screen, 75, 100)
+
+        for single_color in clicked_button_list:
+            draw_text("-" + single_color, pygame.font.SysFont(None, 30), c.black, screen, 75, y_pos)
+            y_pos += 25
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -319,12 +327,11 @@ def feedback():
         y_pos3 = 379
         y_pos4 = 379
         y_pos5 = 379
-
-        y_pos6 = 779
-        y_pos7 = 779
-        y_pos8 = 779
-        y_pos9 = 779
-        y_pos10 = 779
+        y_pos6 = 795
+        y_pos7 = 795
+        y_pos8 = 795
+        y_pos9 = 795
+        y_pos10 = 795
         color_code_feedback = []
         color_score_list = []
         screen.fill((240,255,255))
@@ -347,7 +354,7 @@ def feedback():
 
         score_color_percent = str(color_score_list[0])
         color_names = color_code_feedback[0]
-        draw_text(score_color_percent + "%", font, c.black, screen, 20, 357)
+        draw_text(score_color_percent + "%" + " similar",font, c.black, screen, 20, 357)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
             draw_text("-" + color_name_single, font, c.black, screen, 20, y_pos)
@@ -363,7 +370,7 @@ def feedback():
 
         score_color_percent = str(color_score_list[1])
         color_names = color_code_feedback[1]
-        draw_text(score_color_percent + "%", font, c.black, screen, 315, 357)
+        draw_text(score_color_percent + "%" + " similar",font, c.black, screen, 315, 357)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
             draw_text("-" + color_name_single, font, c.black, screen, 315, y_pos2)
@@ -380,7 +387,7 @@ def feedback():
 
         score_color_percent = str(color_score_list[2])
         color_names = color_code_feedback[2]
-        draw_text(score_color_percent + "%", font, c.black, screen, 610, 357)
+        draw_text(score_color_percent + "%" + " similar", font, c.black, screen, 610, 357)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
             draw_text("-" + color_name_single, font, c.black, screen, 610, y_pos3)
@@ -396,7 +403,7 @@ def feedback():
 
         score_color_percent = str(color_score_list[3])
         color_names = color_code_feedback[3]
-        draw_text(score_color_percent + "%", font, c.black, screen, 905, 357)
+        draw_text(score_color_percent + "%" + " similar",font, c.black, screen, 905, 357)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
             draw_text("-" + color_name_single, font, c.black, screen, 905, y_pos4)
@@ -413,7 +420,7 @@ def feedback():
 
         score_color_percent = str(color_score_list[4])
         color_names = color_code_feedback[4]
-        draw_text(score_color_percent + "%", font, c.black, screen, 1200, 357)
+        draw_text(score_color_percent + "%" + " similar",font, c.black, screen, 1200, 357)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
             draw_text("-" + color_name_single, font, c.black, screen, 1200, y_pos5)
@@ -429,83 +436,83 @@ def feedback():
 
         score_color_percent = str(color_score_list[5])
         color_names = color_code_feedback[5]
-        draw_text(score_color_percent + "%", font, c.black, screen, 20, 757)
+        draw_text(score_color_percent + "%" + " similar",font, c.black, screen, 20, 771)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
             draw_text("-" + color_name_single, font, c.black, screen, 20, y_pos6)
             y_pos6 += 19
         top_1_count = list(algoritme_uitkomst[5])
         most_picks_1 = algo.most_picks(str(top_1_count))
-        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 20, 735)
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 20, 751)
         algo.create_image2(color_code_feedback[5], 270)
         randomly_generated_image2 = Image.open(r'image2.png')
         pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
         pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
-        screen.blit(pygame_surface_top2, (20, 450))
+        screen.blit(pygame_surface_top2, (20, 465))
 
         score_color_percent = str(color_score_list[6])
         color_names = color_code_feedback[6]
-        draw_text(score_color_percent + "%", font, c.black, screen, 315, 757)
+        draw_text(score_color_percent + "%" + " similar",font, c.black, screen, 315, 771)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
             draw_text("-" + color_name_single, font, c.black, screen, 315, y_pos7)
             y_pos7 += 19
         top_1_count = list(algoritme_uitkomst[6])
         most_picks_1 = algo.most_picks(str(top_1_count))
-        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 315, 735)
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 315, 751)
         algo.create_image2(color_code_feedback[6], 270)
         randomly_generated_image2 = Image.open(r'image2.png')
         pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
         pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
-        screen.blit(pygame_surface_top2, (315, 450))
+        screen.blit(pygame_surface_top2, (315, 465))
 
         score_color_percent = str(color_score_list[7])
         color_names = color_code_feedback[7]
-        draw_text(score_color_percent + "%", font, c.black, screen, 610, 757)
+        draw_text(score_color_percent + "%" + " similar",font, c.black, screen, 610, 771)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
             draw_text("-" + color_name_single, font, c.black, screen, 610, y_pos8)
             y_pos8 += 19
         top_1_count = list(algoritme_uitkomst[7])
         most_picks_1 = algo.most_picks(str(top_1_count))
-        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 610, 735)
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 610, 751)
         algo.create_image2(color_code_feedback[7], 270)
         randomly_generated_image2 = Image.open(r'image2.png')
         pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
         pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
-        screen.blit(pygame_surface_top2, (610, 450))
+        screen.blit(pygame_surface_top2, (610, 465))
 
         score_color_percent = str(color_score_list[8])
         color_names = color_code_feedback[8]
-        draw_text(score_color_percent + "%", font, c.black, screen, 905, 757)
+        draw_text(score_color_percent + "%" + " similar",font, c.black, screen, 905, 771)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
             draw_text("-" + color_name_single, font, c.black, screen, 905, y_pos9)
             y_pos9 += 19
         top_1_count = list(algoritme_uitkomst[8])
         most_picks_1 = algo.most_picks(str(top_1_count))
-        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 905, 735)
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 905, 751)
         algo.create_image2(color_code_feedback[8], 270)
         randomly_generated_image2 = Image.open(r'image2.png')
         pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
         pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
-        screen.blit(pygame_surface_top2, (905, 450))
+        screen.blit(pygame_surface_top2, (905, 465))
 
         score_color_percent = str(color_score_list[9])
         color_names = color_code_feedback[9]
-        draw_text(score_color_percent + "%", font, c.black, screen, 1200, 757)
+        draw_text(score_color_percent + "%" + " similar",font, c.black, screen, 1200, 771)
         for single_color in color_names:
             color_name_single = algo.get_key(single_color)
             draw_text("-" + color_name_single, font, c.black, screen, 1200, y_pos10)
             y_pos10 += 19
         top_1_count = list(algoritme_uitkomst[9])
         most_picks_1 = algo.most_picks(str(top_1_count))
-        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 1200, 735)
+        draw_text(str(most_picks_1) + " votes", font, c.black, screen, 1200, 751)
         algo.create_image2(color_code_feedback[9], 270)
         randomly_generated_image2 = Image.open(r'image2.png')
         pygame_surface_top2 = algo.pilImageToSurface(randomly_generated_image2)
         pygame_surface_top2 = pygame.transform.smoothscale(pygame_surface_top2, (275, 275))
-        screen.blit(pygame_surface_top2, (1200, 450))
+        screen.blit(pygame_surface_top2, (1200, 465))
 
         for event in pygame.event.get():
             if event.type == QUIT:
