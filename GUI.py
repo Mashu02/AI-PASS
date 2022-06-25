@@ -231,7 +231,7 @@ def main_menu():
         pygame.draw.rect(screen, c.black, button_feedback_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
         pygame.draw.rect(screen, (211, 211, 211), button_generate)
-        draw_text('Result', pygame.font.SysFont(None, 70), c.black, screen, 235, 725)
+        draw_text('Result', pygame.font.SysFont(None, 70), c.black, screen, 350, 725)
         click = False
 
 
