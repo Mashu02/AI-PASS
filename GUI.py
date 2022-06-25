@@ -48,9 +48,9 @@ def main_menu():
     while True:
 
         screen.fill((240,255,255))
-        draw_text('pick color(s)', pygame.font.SysFont(None, 50), c.black, screen, 275, 35)
-        draw_text('selected colors', pygame.font.SysFont(None, 50), c.black, screen, 695, 35)
-        draw_text('your liked combinations', pygame.font.SysFont(None, 50), c.black, screen, 1065, 35)
+        draw_text('Pick color(s)', pygame.font.SysFont(None, 50), c.black, screen, 275, 35)
+        draw_text('Selected colors', pygame.font.SysFont(None, 50), c.black, screen, 695, 35)
+        draw_text('Your liked combinations:', pygame.font.SysFont(None, 50), c.black, screen, 1065, 35)
         y_pos = 92
         y_pos_color_code = 92
         mouse = pygame.mouse.get_pos()
@@ -60,6 +60,9 @@ def main_menu():
 
         button_feedback = pygame.Rect(230, 700, 401, 100)
         button_feedback_outline = pygame.Rect(227,697,407,106)
+
+        button_clear = pygame.Rect(1070, 700, 280, 100)
+        button_clear_outline = pygame.Rect(1067, 697, 286, 106)
 
         if button_feedback.collidepoint((mouse)):
             if click:
@@ -237,15 +240,21 @@ def main_menu():
         if button_generate.collidepoint((mouse)):
             if click:
                 generate()
-
+        if button_clear.collidepoint((mouse)):
+            if click:
+                liked_color_combinations.clear()
         pygame.draw.rect(screen, c.black, button_feedback_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
 
         pygame.draw.rect(screen, c.black, button_generate_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_generate)
 
+        pygame.draw.rect(screen, c.black, button_clear_outline)
+        pygame.draw.rect(screen, (211, 211, 211), button_clear)
+
         draw_text('show result', pygame.font.SysFont(None, 60), c.black, screen, 310, 730)
         draw_text('generate input', pygame.font.SysFont(None, 40), c.black, screen, 746, 735)
+        draw_text('clear combinations', pygame.font.SysFont(None, 40), c.black, screen, 1075, 735)
         click = False
 
 
