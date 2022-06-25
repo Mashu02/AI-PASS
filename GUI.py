@@ -61,8 +61,11 @@ def main_menu():
         button_feedback = pygame.Rect(230, 700, 401, 100)
         button_feedback_outline = pygame.Rect(227,697,407,106)
 
-        button_clear = pygame.Rect(1070, 700, 280, 100)
-        button_clear_outline = pygame.Rect(1067, 697, 286, 106)
+        button_clear = pygame.Rect(1065, 700, 280, 100)
+        button_clear_outline = pygame.Rect(1062, 697, 286, 106)
+
+        button_save = pygame.Rect(1380, 700, 130, 100)
+        button_save_outline = pygame.Rect(1377, 697, 136, 106)
 
         if button_feedback.collidepoint((mouse)):
             if click:
@@ -243,6 +246,10 @@ def main_menu():
         if button_clear.collidepoint((mouse)):
             if click:
                 liked_color_combinations.clear()
+        if button_save.collidepoint((mouse)):
+            if click:
+                algo.list_to_clipboard(str(liked_color_combinations))
+                draw_text('copied to clipboard!', pygame.font.SysFont(None, 35), c.black, screen, 1250, 630)
         pygame.draw.rect(screen, c.black, button_feedback_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
 
@@ -252,9 +259,13 @@ def main_menu():
         pygame.draw.rect(screen, c.black, button_clear_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_clear)
 
+        pygame.draw.rect(screen, c.black, button_save_outline)
+        pygame.draw.rect(screen, (211, 211, 211), button_save)
+
         draw_text('show result', pygame.font.SysFont(None, 60), c.black, screen, 310, 730)
         draw_text('generate input', pygame.font.SysFont(None, 40), c.black, screen, 746, 735)
-        draw_text('clear combinations', pygame.font.SysFont(None, 40), c.black, screen, 1075, 735)
+        draw_text('clear combinations', pygame.font.SysFont(None, 40), c.black, screen, 1070, 735)
+        draw_text('copy', pygame.font.SysFont(None, 40), c.black, screen, 1410, 735)
         click = False
 
 
@@ -316,7 +327,7 @@ def main_menu():
                     click = True
 
         pygame.display.update()
-        mainClock.tick(60)
+        mainClock.tick(25)
 
 def generate():
 
@@ -346,7 +357,7 @@ def generate():
                     running = False
 
         pygame.display.update()
-        mainClock.tick(60)
+        mainClock.tick(25)
 
 def feedback():
     running = True
@@ -605,6 +616,6 @@ def feedback():
                 if event.button == 1:
                     click = True
         pygame.display.update()
-        mainClock.tick(60)
+        mainClock.tick(20)
 
 main_menu()

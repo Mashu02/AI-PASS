@@ -5,6 +5,7 @@ import random
 from PIL import Image
 import pygame
 import colors as c
+import pyperclip
 
 #kleuren van algoritme naar rgb codes
 colors = [(0, 0, 0), (128, 128, 128), (192, 192, 192), (255, 255, 255), (139, 69, 19), (255, 0, 0)
@@ -30,8 +31,6 @@ def create_image(colors, size):
             image.putpixel((x, y), random.choice(colors))
     image.save('image.png')
 
-
-
 def create_image2(colors, size):
     image = Image.new('RGB', (size, size))
     for x in range(image.width):
@@ -48,6 +47,10 @@ def pilImageToSurface(pilImage):
     return pygame.image.fromstring(
         pilImage.tobytes(), pilImage.size, pilImage.mode).convert()
 
+#copy de gelikte combinations in clip board
+def list_to_clipboard(output_list):
+    if len(output_list) > 0:
+        pyperclip.copy('\n'.join(output_list))
 
 # wil ik doen bij de top 5 combinaties hoevaak die voor komt
 #telt hoevaak kleur combinatie is voorgekomen
