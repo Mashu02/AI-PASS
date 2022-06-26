@@ -250,6 +250,7 @@ def main_menu():
             if click:
                 algo.list_to_clipboard(str(liked_color_combinations))
                 draw_text('copied to clipboard!', pygame.font.SysFont(None, 35), c.black, screen, 1250, 630)
+
         pygame.draw.rect(screen, c.black, button_feedback_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
 
