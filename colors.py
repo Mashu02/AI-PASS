@@ -1,3 +1,4 @@
+#elke kleur in rgb value
 black = (0, 0, 0)
 grey = (128,128,128)
 silver = (192,192,192)

@@ -15,8 +15,16 @@ colors = [(0, 0, 0), (128, 128, 128), (192, 192, 192), (255, 255, 255), (139, 69
 df = pd.read_csv('data_full_full.csv', sep=';')
 df_list = df.values.tolist()
 
-# voor rbg value naar text
+
 def get_key(val):
+    """Voor rbg value naar text
+
+    Args:
+        val (str): text op scherm
+
+    Returns:
+        None
+    """
     for key, value in c.color_with_rbg.items():
         if val == value:
             return key
@@ -62,17 +70,23 @@ def most_picks(combination_nummer):
 
 
 # https://en.wikipedia.org/wiki/Cosine_similarity
-#algoritme cosine similarity
+#algoritme cosine similarity met return de top combinaties
 def cosine_sim(lijst, top_hoeveel, input_user):
     combination_with_cosim = {}
+    #elke combinatie in de hele dataset
     for x in df_list:
         sum = 0
         sumA = 0
         sumB = 0
         for i, j in zip(x, lijst):
+
+            #dot product, doet alle elementen in de gegeven lijst * alle andere elementen in de dataframe
             sum += i * j
+
+            #magnitude, doet elk van de elementen in kwadraat en telt alles op dan pak je de wortel ervan
             sumA += i * i
             sumB += j * j
+
         cossim = sum / ((sqrt(sumA)) * (sqrt(sumB)))
         combination_with_cosim[tuple(x)] = cossim
 
@@ -85,10 +99,9 @@ def cosine_sim(lijst, top_hoeveel, input_user):
     # de top waardes in een dictionary
     top_dic = dict(Counter(combination_with_cosim).most_common(top_hoeveel))
     top_dic_keys = list(top_dic.keys())
-    # return list met top 5 als string
     return top_dic_keys
 
-
+#algoritme cosine similarity met return de top tussen 0-1
 def cosine_sim_score(lijst, top_hoeveel, input_user):
     combination_with_cosim = {}
     for x in df_list:

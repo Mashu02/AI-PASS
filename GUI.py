@@ -8,7 +8,7 @@ from PIL import Image
 
 mainClock = pygame.time.Clock()
 pygame.init()
-####################################################BUTTON FEEDBACK ONDER DE KLEUREN EN TEXT SIZE VERANDEREN
+
 
 #screen
 screen = pygame.display.set_mode((1536, 870))
@@ -27,34 +27,74 @@ color_name_liked_combo = []
 
 
 def place_button(button, button_color):
+    """Om de buttons op het scherm te plaatsen
+
+    Args:
+        button (int): een rbg value van kleur
+        button_color (pygame.Rect): een pygame rect met x,y waarde en width height waarde
+
+    Returns:
+        pygame.draw.rect: tekent de button op het scherm met de kleur en button
+    """
     return pygame.draw.rect(screen, button, button_color)
 
-#voor button green en red buttons in feedback
+
 def place_liked_buttons(button_x, button_y,size):
+    """voor de green button in feedback
+
+    Args:
+        button_x (int): x waarde van button
+        button_y (int): y waarde van button
+        size (int): width height waarde van button
+
+    Returns:
+        None
+    """
     green_button = pygame.Rect(button_x, button_y, size, size)
     green_button_black_border = pygame.Rect(button_x - 3, button_y - 3, size + 6, size + 6)
     pygame.draw.rect(screen, c.black, green_button_black_border)
     pygame.draw.rect(screen, (102, 255, 0), green_button)
 
-
-
 def draw_text(text, font, color, surface, x, y):
+    """Om de text te plaatsen op het scherm
+
+    Args:
+        text (str): text op scherm
+        font (pygame.font.SysFont): font en size
+        color (int): een rbg value van kleur
+        surface (pygame.display.set_mode): x en y voor resolutie scherm
+        x (int): x waarde van text
+        y (int): x waarde van text
+
+    Returns:
+        None
+    """
     textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
     textrect.topleft = (x, y)
     surface.blit(textobj, textrect)
 
-def main_menu():
-    while True:
 
+def main_menu():
+    """main menu scherm loop
+    Args:
+        None
+    Returns:
+        None
+    """
+    while True:
+        #scherm kleur
         screen.fill((240,255,255))
         draw_text('Pick color(s)', pygame.font.SysFont(None, 50), c.black, screen, 275, 35)
         draw_text('Selected colors', pygame.font.SysFont(None, 50), c.black, screen, 695, 35)
         draw_text('Your liked combinations:', pygame.font.SysFont(None, 50), c.black, screen, 1065, 35)
         y_pos = 92
         y_pos_color_code = 92
+
+        #muis positie
         mouse = pygame.mouse.get_pos()
 
+        #button maken
         button_generate = pygame.Rect(696, 700, 301, 100)
         button_generate_outline = pygame.Rect(693, 697, 307, 106)
 
@@ -67,6 +107,8 @@ def main_menu():
         button_save = pygame.Rect(1380, 700, 130, 100)
         button_save_outline = pygame.Rect(1377, 697, 136, 106)
 
+
+        #is voor de buttons wanneer de muis tussen de x en y waardes zit
         if button_feedback.collidepoint((mouse)):
             if click:
                 feedback()
@@ -251,6 +293,7 @@ def main_menu():
                 algo.list_to_clipboard(str(liked_color_combinations))
                 draw_text('copied to clipboard!', pygame.font.SysFont(None, 35), c.black, screen, 1250, 630)
 
+        #button placen
         pygame.draw.rect(screen, c.black, button_feedback_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_feedback)
 
@@ -263,13 +306,14 @@ def main_menu():
         pygame.draw.rect(screen, c.black, button_save_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_save)
 
+        #text plaatsen
         draw_text('show result', pygame.font.SysFont(None, 60), c.black, screen, 310, 730)
         draw_text('generate input', pygame.font.SysFont(None, 40), c.black, screen, 746, 735)
         draw_text('clear combinations', pygame.font.SysFont(None, 40), c.black, screen, 1070, 735)
         draw_text('copy', pygame.font.SysFont(None, 40), c.black, screen, 1410, 735)
         click = False
 
-
+        #kleur buttons plaatsen
         place_button(c.black, b.out_button_black)
         place_button(c.black, b.button_black)
         place_button(c.black, b.out_button_grey)
@@ -331,7 +375,12 @@ def main_menu():
         mainClock.tick(25)
 
 def generate():
-
+    """generate menu scherm loop
+    Args:
+        None
+    Returns:
+        None
+    """
     running = True
     while running:
         y_pos = 135
@@ -340,6 +389,7 @@ def generate():
         algo.create_image(clicked_button_list_codes, 500)
         randomly_generated_image1 = pygame.image.load('image.png')
         screen.blit(randomly_generated_image1, (320, 100))
+
 
         input_list_user = (list(clicked_button.values()))
         top_count = algo.most_picks(str(input_list_user))
@@ -361,8 +411,15 @@ def generate():
         mainClock.tick(25)
 
 def feedback():
+    """feedback menu scherm loop
+    Args:
+        None
+    Returns:
+        None
+    """
     running = True
     while running:
+        #y posities voor de result blokken
         y_pos = 379
         y_pos2 = 379
         y_pos3 = 379
@@ -382,18 +439,23 @@ def feedback():
         input = clicked_button.values()
         input_tuple = tuple(input)
 
+        #gebruikt algoritme
         algoritme_uitkomst = algo.cosine_sim(input, 10, input_tuple)
         algoritme_score = algo.cosine_sim_score(input, 10, input_tuple)
 
+        #klikken komt dan in de lijst
         for color_zero_one in algoritme_uitkomst:
             x = (algo.list_to_color(color_zero_one))
             color_code_feedback.append(x)
 
+        #% berekenen van algoritme score
         for single_score in algoritme_score:
             score_percent = single_score * 100
             score_percent2 = round(score_percent, 2)
             color_score_list.append(score_percent2)
 
+
+        #elk van de resultaten plaatsen met de info erbij
         score_color_percent = str(color_score_list[0])
         color_names = color_code_feedback[0]
         draw_text(score_color_percent + "%" + " similar",font, c.black, screen, 20, 357)
@@ -603,7 +665,6 @@ def feedback():
             if click and color_names not in liked_color_combinations:
                 liked_color_combinations.append(color_names)
                 draw_text("X",pygame.font.SysFont(None, 55),c.black, screen,1323,769)
-
         click = False
 
         for event in pygame.event.get():

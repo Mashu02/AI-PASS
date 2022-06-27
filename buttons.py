@@ -2,6 +2,8 @@ import pygame
 
 sizex = 106
 
+#elk van de buttons hun x y waarde en dan width en height
+
 out_button_black = pygame.Rect(77, 97, sizex, sizex)
 button_black = pygame.Rect(80, 100, 100, 100)
 out_button_grey = pygame.Rect(227, 97, sizex, sizex)
