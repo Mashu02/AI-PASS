@@ -17,22 +17,28 @@ df_list = df.values.tolist()
 
 
 def get_key(val):
-    """Voor rbg value naar text
+    """voor rbg value naar text uit dictionary colors.py
 
     Args:
-        val (str): text op scherm
+        val (tuple): value in rbg value waarde
 
     Returns:
-        None
+        key (str): de key van de gegeven value
     """
     for key, value in c.color_with_rbg.items():
         if val == value:
             return key
 
-
-#om een size x size image te genereren met gegeven kleuren maar random plek
 def create_image(colors, size):
+    """om een size x size image te genereren met gegeven kleuren maar random plek
 
+    Args:
+        colors (list): list van value in rbg value waarde
+        size (int): width en heigt in pixel van de generated kleuren
+
+    Returns:
+        image (image): een image die gesaved word
+    """
     image = Image.new('RGB', (size, size))
     for x in range(image.width):
         for y in range(image.height):
@@ -40,29 +46,65 @@ def create_image(colors, size):
     image.save('image.png')
 
 def create_image2(colors, size):
+    """om een size x size image te genereren met gegeven kleuren maar random plek
+
+    Args:
+        colors (list): list van value in rbg value waarde
+        size (int): width en heigt in pixel van de generated kleuren
+
+    Returns:
+        image (image): een image die gesaved word
+    """
     image = Image.new('RGB', (size, size))
     for x in range(image.width):
         for y in range(image.height):
             image.putpixel((x, y), random.choice(colors))
     image.save('image2.png')
 
-# om van de keys uit dictionary naar rgb code
 def list_to_color(tuple):
+    """om van de keys uit dictionary naar rgb code in list
+
+    Args:
+        tuple (tuple): combinatie van 0 en 1 in een tuple
+
+    Returns:
+        list (list): een lijst met waardes van rgb value
+    """
     return [color for keep, color in zip(tuple, colors) if keep]
 
-#voor PIL image naar pygame
 def pilImageToSurface(pilImage):
-    return pygame.image.fromstring(
-        pilImage.tobytes(), pilImage.size, pilImage.mode).convert()
+    """voor PIL image naar pygame
 
-#copy de gelikte combinations in clip board
+    Args:
+        pilImage (png file): PIL image
+
+    Returns:
+        image (pygame.image.fromstring): image om te kunnen gebruiken in pygame
+    """
+    return pygame.image.fromstring(pilImage.tobytes(), pilImage.size, pilImage.mode).convert()
+
+
 def list_to_clipboard(output_list):
+    """copy de gelikte combinations in clip board
+
+    Args:
+        output_list (list): lijst die je wilt kopiëren
+
+    Returns:
+        None
+    """
     if len(output_list) > 0:
         pyperclip.copy('\n'.join(output_list))
 
-# wil ik doen bij de top 5 combinaties hoevaak die voor komt
-#telt hoevaak kleur combinatie is voorgekomen
 def most_picks(combination_nummer):
+    """telt hoevaak kleur combinatie is voorgekomen
+
+    Args:
+        combination_nummer (str): de combinatie met 0 en 1 in een tuple als string
+
+    Returns:
+        c[combination_nummer] (int): hoevaak het voorkomt
+    """
     c = Counter()
     for combination in df_list:
         c[str(combination)] += 1
@@ -70,8 +112,18 @@ def most_picks(combination_nummer):
 
 
 # https://en.wikipedia.org/wiki/Cosine_similarity
-#algoritme cosine similarity met return de top combinaties
+
 def cosine_sim(lijst, top_hoeveel, input_user):
+    """algoritme cosine similarity met de combinatie van kleuren
+
+    Args:
+        lijst (list): input van de gebruiker in lijst van 1 en 0
+        top_hoeveel (int): de top hoeveel je wilt in combinatie
+        input_user (tuple): de gebruiker input in een tuple om te verwijderen
+
+    Returns:
+        top_dic_keys (list): return de top combinaties van kleuren[0 en 1]en in een list
+    """
     combination_with_cosim = {}
     #elke combinatie in de hele dataset
     for x in df_list:
@@ -101,8 +153,17 @@ def cosine_sim(lijst, top_hoeveel, input_user):
     top_dic_keys = list(top_dic.keys())
     return top_dic_keys
 
-#algoritme cosine similarity met return de top tussen 0-1
 def cosine_sim_score(lijst, top_hoeveel, input_user):
+    """algoritme cosine similarity met de percentage van kleuren
+
+    Args:
+        lijst (list): input van de gebruiker in lijst van 1 en 0
+        top_hoeveel (int): de top hoeveel je wilt in combinatie
+        input_user (tuple): de gebruiker input in een tuple om te verwijderen
+
+    Returns:
+        top_dic_values (list): return de top combinaties met percentage van kleuren
+    """
     combination_with_cosim = {}
     for x in df_list:
         sum = 0

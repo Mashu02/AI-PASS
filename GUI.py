@@ -30,7 +30,7 @@ def place_button(button, button_color):
     """Om de buttons op het scherm te plaatsen
 
     Args:
-        button (int): een rbg value van kleur
+        button (tuple): een rbg value van kleur
         button_color (pygame.Rect): een pygame rect met x,y waarde en width height waarde
 
     Returns:
@@ -61,7 +61,7 @@ def draw_text(text, font, color, surface, x, y):
     Args:
         text (str): text op scherm
         font (pygame.font.SysFont): font en size
-        color (int): een rbg value van kleur
+        color (tuple): een rbg value van kleur
         surface (pygame.display.set_mode): x en y voor resolutie scherm
         x (int): x waarde van text
         y (int): x waarde van text
