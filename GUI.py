@@ -383,21 +383,21 @@ def generate():
     """
     running = True
     while running:
-        y_pos = 135
+        y_pos = 185
         screen.fill((240,255,255))
-        draw_text('generated', pygame.font.SysFont(None, 35), c.black, screen, 500, 50)
-        algo.create_image(clicked_button_list_codes, 500)
+        draw_text('generated', pygame.font.SysFont(None, 45), c.black, screen, 835, 50)
+        algo.create_image(clicked_button_list_codes, 640)
         randomly_generated_image1 = pygame.image.load('image.png')
-        screen.blit(randomly_generated_image1, (320, 100))
+        screen.blit(randomly_generated_image1, (600, 100))
 
 
         input_list_user = (list(clicked_button.values()))
         top_count = algo.most_picks(str(input_list_user))
-        draw_text(str(top_count) + " votes", pygame.font.SysFont(None, 30), c.black, screen, 75, 100)
+        draw_text(str(top_count) + " votes", pygame.font.SysFont(None, 50), c.black, screen, 75, 100)
 
         for single_color in clicked_button_list:
-            draw_text("-" + single_color, pygame.font.SysFont(None, 30), c.black, screen, 75, y_pos)
-            y_pos += 25
+            draw_text("-" + single_color, pygame.font.SysFont(None, 50), c.black, screen, 75, y_pos)
+            y_pos += 45
 
         for event in pygame.event.get():
             if event.type == QUIT:

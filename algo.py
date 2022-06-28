@@ -83,6 +83,20 @@ def pilImageToSurface(pilImage):
     """
     return pygame.image.fromstring(pilImage.tobytes(), pilImage.size, pilImage.mode).convert()
 
+def data_check():
+    """kijkt of de dataset wel echt werkt
+
+    Args:
+        None
+
+    Returns:
+        True (bool): als er geen [0,0,...] in zit en als die niet leeg is
+        False (bool): als er wel [0,0,...] en of leeg is
+    """
+    if [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] not in df_list and len(df_list) >= 1:
+        return True
+    else:
+        return False
 
 def list_to_clipboard(output_list):
     """copy de gelikte combinations in clip board
