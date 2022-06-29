@@ -1,4 +1,5 @@
 ## AI-PASS
+De color matcher is een GUI die kleuren matcht met de gegeven kleur van de gebruiker. Hiervoor is het Cosine similarity algoritme toegepast. 
 
 # pip installs
 Om het programma te kunnen runnen moeten bepaalde libaries geïnstalleerd worden
