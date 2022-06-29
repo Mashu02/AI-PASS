@@ -110,7 +110,7 @@ def main_menu():
 
         #is voor de buttons wanneer de muis tussen de x en y waardes zit
         if button_feedback.collidepoint((mouse)):
-            if click:
+            if click and len(clicked_button_list) != 0:
                 feedback()
         elif b.button_black.collidepoint((mouse)):
             if click:
@@ -283,7 +283,7 @@ def main_menu():
                     clicked_button_list_codes.append((255,105,180))
                     clicked_button_list.append("Pink")
         if button_generate.collidepoint((mouse)):
-            if click:
+            if click and len(clicked_button_list) != 0:
                 generate()
         if button_clear.collidepoint((mouse)):
             if click:
@@ -440,8 +440,8 @@ def feedback():
         input_tuple = tuple(input)
 
         #gebruikt algoritme
-        algoritme_uitkomst = algo.cosine_sim(input, 10, input_tuple)
-        algoritme_score = algo.cosine_sim_score(input, 10, input_tuple)
+        algoritme_uitkomst = algo.cosine_sim(input, 10, input_tuple, algo.df_list)
+        algoritme_score = algo.cosine_sim_score(input, 10, input_tuple, algo.df_list)
 
         #klikken komt dan in de lijst
         for color_zero_one in algoritme_uitkomst:
@@ -680,4 +680,6 @@ def feedback():
         pygame.display.update()
         mainClock.tick(20)
 
-main_menu()
+#voor pydoc generate
+if __name__ == '__main__':
+    main_menu()

@@ -127,7 +127,7 @@ def most_picks(combination_nummer):
 
 # https://en.wikipedia.org/wiki/Cosine_similarity
 
-def cosine_sim(lijst, top_hoeveel, input_user):
+def cosine_sim(lijst, top_hoeveel, input_user, whole_data_in_list):
     """algoritme cosine similarity met de combinatie van kleuren
 
     Args:
@@ -140,7 +140,7 @@ def cosine_sim(lijst, top_hoeveel, input_user):
     """
     combination_with_cosim = {}
     #elke combinatie in de hele dataset
-    for x in df_list:
+    for x in whole_data_in_list:
         sum = 0
         sumA = 0
         sumB = 0
@@ -167,7 +167,7 @@ def cosine_sim(lijst, top_hoeveel, input_user):
     top_dic_keys = list(top_dic.keys())
     return top_dic_keys
 
-def cosine_sim_score(lijst, top_hoeveel, input_user):
+def cosine_sim_score(lijst, top_hoeveel, input_user, whole_data_in_list):
     """algoritme cosine similarity met de percentage van kleuren
 
     Args:
@@ -179,7 +179,7 @@ def cosine_sim_score(lijst, top_hoeveel, input_user):
         top_dic_values (list): return de top combinaties met percentage van kleuren
     """
     combination_with_cosim = {}
-    for x in df_list:
+    for x in whole_data_in_list:
         sum = 0
         sumA = 0
         sumB = 0
