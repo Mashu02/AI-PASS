@@ -125,8 +125,6 @@ def most_picks(combination_nummer):
     return (c[combination_nummer])
 
 
-# https://en.wikipedia.org/wiki/Cosine_similarity
-
 def cosine_sim(lijst, top_hoeveel, input_user, whole_data_in_list):
     """algoritme cosine similarity met de combinatie van kleuren
 
@@ -204,4 +202,83 @@ def cosine_sim_score(lijst, top_hoeveel, input_user, whole_data_in_list):
     # return list met top 5 als string
     return top_dic_values
 
+def place_button(button, button_color, waar):
+    """Om de buttons op het scherm te plaatsen
 
+    Args:
+        button (tuple): een rbg value van kleur
+        button_color (pygame.Rect): een pygame rect met x,y waarde en width height waarde
+
+    Returns:
+        pygame.draw.rect: tekent de button op het scherm met de kleur en button
+    """
+    return pygame.draw.rect(waar, button, button_color)
+
+def draw_text(text, font, color, surface, x, y):
+    """Om de text te plaatsen op het scherm
+
+    Args:
+        text (str): text op scherm
+        font (pygame.font.SysFont): font en size
+        color (tuple): een rbg value van kleur
+        surface (pygame.display.set_mode): x en y voor resolutie scherm
+        x (int): x waarde van text
+        y (int): x waarde van text
+
+    Returns:
+        None
+    """
+    textobj = font.render(text, 1, color)
+    textrect = textobj.get_rect()
+    textrect.topleft = (x, y)
+    surface.blit(textobj, textrect)
+
+
+def place_liked_buttons(button_x, button_y,size, waar):
+    """voor de green button in feedback
+
+    Args:
+        button_x (int): x waarde van button
+        button_y (int): y waarde van button
+        size (int): width height waarde van button
+
+    Returns:
+        None
+    """
+    green_button = pygame.Rect(button_x, button_y, size, size)
+    green_button_black_border = pygame.Rect(button_x - 3, button_y - 3, size + 6, size + 6)
+    pygame.draw.rect(waar, c.black, green_button_black_border)
+    pygame.draw.rect(waar, (102, 255, 0), green_button)
+
+def rgb_to_hsb(lijst_van_rgb):
+    """voor de rgb values te veranderen naar hsv
+
+    Args:
+        lijst_van_rgb (list): lijst van rgb values
+
+    Returns:
+        hsv (list): hsv waardes in een lijst
+    """
+    lst = []
+    for s_color in lijst_van_rgb:
+        lst.append(s_color/255)
+
+    mx = max(lst)
+    mn = min(lst)
+    df = mx-mn
+    if mx == mn:
+        h = 0
+    elif mx == lst[0]:
+        h = (60 * ((lst[1]-lst[2])/df) + 360) % 360
+    elif mx == lst[1]:
+        h = (60 * ((lst[2]-lst[0])/df) + 120) % 360
+    elif mx == lst[2]:
+        h = (60 * ((lst[0]-lst[2])/df) + 240) % 360
+    if mx == 0:
+        s = 0
+    else:
+        s = (df/mx)*100
+    v = mx*100
+    return [h, s, v]
+
+        
